@@ -5,6 +5,7 @@ AI 코딩 에이전트와 사람이 이 레포에서 작업할 때 따르는 규
 - 프로젝트 허브(현황·결정 로그·다음 할 일): https://claude.ai/code/artifact/8d186f8c-8c57-4749-800d-05ea9aacf9df
 - 1단계 설계(플레이그라운드): https://claude.ai/code/artifact/e716fb75-8072-4768-beb6-619afa8a9ed9
 - 세션 기록: `docs/history/YYYY-MM-DD.md`, 조사 노트: `docs/research/`
+- **새 세션은 `docs/handoff.md`(인수인계: 현재 상태·결정·할 일)부터 읽는다**
 
 ## 프로젝트 한 줄
 
@@ -43,6 +44,7 @@ pnpm build
 - **상수**: 3곳 이상 반복될 때만 상수화. 쓰는 도메인 폴더의 `constants/`에 둔다. 코드값은 `as const` + 타입 파생 + 라벨 `Record`(한·영). enum은 쓰지 않는다.
 - **중복**: 3곳 이상 반복돼도 승인 없이 공통화하지 않는다. 승격을 제안만 한다.
 - **주석**: 한국어로 "왜"만 쓴다.
+- **커서**: 버튼은 항상 `cursor: pointer`(`index.css`의 base 레이어가 처리). 클릭되는 라디오·체크박스의 `label`에도 `cursor-pointer`를 준다.
 
 ## 상태와 데이터
 
