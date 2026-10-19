@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Pretendard Variable', 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
+}
+
+/* 키보드 사용자를 위해 포커스 표시를 브라우저 기본보다 분명하게 */
+:focus-visible {
+  outline: 3px solid var(--color-blue-600);
+  outline-offset: 2px;
+}

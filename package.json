@@ -1,0 +1,15 @@
+{
+  "name": "semantic-a11y",
+  "private": true,
+  "packageManager": "pnpm@12.14.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @semantic-a11y/web dev",
+    "build": "pnpm --filter @semantic-a11y/web build",
+    "preview": "pnpm --filter @semantic-a11y/web preview",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint"
+  }
+}

@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# jsx-a11y 6.10은 peer 범위가 ESLint 9까지지만 10에서 동작을 확인했다(위반 예제로 규칙 발동 확인)
+peerDependencyRules:
+  allowedVersions:
+    eslint-plugin-jsx-a11y>eslint: "10"
