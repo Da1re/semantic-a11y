@@ -1,0 +1,210 @@
+{
+  "judgements": [
+    {
+      "selector": "#product-hero-img",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.93,
+      "severity": "serious",
+      "reason": {
+        "ko": "사진은 아이보리색 린넨 셔츠인데 대체 텍스트는 \"빨간 원피스\"다. 상품 종류와 색이 모두 다르다.",
+        "en": "The photo shows an ivory linen shirt, but the alt text says \"red dress\". Both the product type and the color are wrong."
+      },
+      "fix": {
+        "before": "id=\"product-hero-img\" alt=\"빨간 원피스\"",
+        "after": "id=\"product-hero-img\" alt=\"아이보리 린넨 오버핏 셔츠 앞면. 단추 여밈에 왼쪽 가슴 주머니가 있다\""
+      }
+    },
+    {
+      "selector": "#thumb-front",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.86,
+      "severity": "moderate",
+      "reason": {
+        "ko": "썸네일 3개의 대체 텍스트가 모두 \"상품 이미지\"라서 앞면·뒷면·원단 사진을 구분할 수 없다.",
+        "en": "All three thumbnails share the alt text \"product image\", so the front, back and fabric photos cannot be told apart."
+      },
+      "fix": {
+        "before": "id=\"thumb-front\" alt=\"상품 이미지\"",
+        "after": "id=\"thumb-front\" alt=\"앞면 사진\""
+      }
+    },
+    {
+      "selector": "#thumb-back",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.86,
+      "severity": "moderate",
+      "reason": {
+        "ko": "썸네일 3개의 대체 텍스트가 모두 \"상품 이미지\"라서 앞면·뒷면·원단 사진을 구분할 수 없다.",
+        "en": "All three thumbnails share the alt text \"product image\", so the front, back and fabric photos cannot be told apart."
+      },
+      "fix": {
+        "before": "id=\"thumb-back\" alt=\"상품 이미지\"",
+        "after": "id=\"thumb-back\" alt=\"뒷면 사진\""
+      }
+    },
+    {
+      "selector": "#thumb-fabric",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.86,
+      "severity": "moderate",
+      "reason": {
+        "ko": "썸네일 3개의 대체 텍스트가 모두 \"상품 이미지\"라서 앞면·뒷면·원단 사진을 구분할 수 없다.",
+        "en": "All three thumbnails share the alt text \"product image\", so the front, back and fabric photos cannot be told apart."
+      },
+      "fix": {
+        "before": "id=\"thumb-fabric\" alt=\"상품 이미지\"",
+        "after": "id=\"thumb-fabric\" alt=\"원단 확대 사진\""
+      }
+    },
+    {
+      "selector": "#size-m",
+      "kwcag": "5.4.1",
+      "verdict": "fail",
+      "confidence": 0.84,
+      "severity": "serious",
+      "reason": {
+        "ko": "선택한 사이즈(M)를 테두리 색으로만 구분한다. 색을 구분하기 어려운 사용자와 화면낭독기 사용자는 어떤 사이즈가 선택됐는지 알 수 없다.",
+        "en": "The selected size (M) is shown only by its border color. Users who cannot distinguish colors, and screen reader users, cannot tell which size is selected."
+      },
+      "fix": {
+        "before": "<button type=\"button\" id=\"size-m\" class=\"size is-selected\">M</button>",
+        "after": "<button type=\"button\" id=\"size-m\" class=\"size is-selected\" aria-pressed=\"true\">M <span aria-hidden=\"true\">✓</span></button>"
+      }
+    },
+    {
+      "selector": "#more-material",
+      "kwcag": "6.4.3",
+      "verdict": "fail",
+      "confidence": 0.78,
+      "severity": "moderate",
+      "reason": {
+        "ko": "\"자세히\" 링크 3개가 각각 소재·사이즈·배송 안내로 이동한다. 링크 목록으로 탐색하면 셋을 구분할 수 없다.",
+        "en": "Three \"more\" links lead to material, size and delivery guides. In a links list they are indistinguishable."
+      },
+      "fix": {
+        "before": "href=\"/guide/material\">자세히</a>",
+        "after": "href=\"/guide/material\">소재 안내 보기</a>"
+      }
+    },
+    {
+      "selector": "#more-size",
+      "kwcag": "6.4.3",
+      "verdict": "fail",
+      "confidence": 0.78,
+      "severity": "moderate",
+      "reason": {
+        "ko": "\"자세히\" 링크 3개가 각각 소재·사이즈·배송 안내로 이동한다. 링크 목록으로 탐색하면 셋을 구분할 수 없다.",
+        "en": "Three \"more\" links lead to material, size and delivery guides. In a links list they are indistinguishable."
+      },
+      "fix": {
+        "before": "href=\"/guide/size\">자세히</a>",
+        "after": "href=\"/guide/size\">사이즈 가이드 보기</a>"
+      }
+    },
+    {
+      "selector": "#more-delivery",
+      "kwcag": "6.4.3",
+      "verdict": "fail",
+      "confidence": 0.78,
+      "severity": "moderate",
+      "reason": {
+        "ko": "\"자세히\" 링크 3개가 각각 소재·사이즈·배송 안내로 이동한다. 링크 목록으로 탐색하면 셋을 구분할 수 없다.",
+        "en": "Three \"more\" links lead to material, size and delivery guides. In a links list they are indistinguishable."
+      },
+      "fix": {
+        "before": "href=\"/guide/delivery\">자세히</a>",
+        "after": "href=\"/guide/delivery\">배송·교환 안내 보기</a>"
+      }
+    },
+    {
+      "selector": "#more-reviews",
+      "kwcag": "6.1.1",
+      "verdict": "fail",
+      "confidence": 0.95,
+      "severity": "critical",
+      "reason": {
+        "ko": "\"리뷰 더보기\"가 div에 onclick만 달려 있어 키보드로 초점을 옮기거나 실행할 수 없다.",
+        "en": "\"More reviews\" is a div with only an onclick handler, so it cannot be focused or activated with a keyboard."
+      },
+      "fix": {
+        "before": "<div id=\"more-reviews\" class=\"more-reviews\" onclick=\"loadMoreReviews()\">리뷰 더보기</div>",
+        "after": "<button type=\"button\" id=\"more-reviews\" class=\"more-reviews\">리뷰 더보기</button>"
+      }
+    },
+    {
+      "selector": "#promo-banner",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.62,
+      "severity": "moderate",
+      "reason": {
+        "ko": "배너 속 글자(최대 40% 할인, 10월 31일까지, 무료배송, 앱 첫 구매 추가 할인)가 대체 텍스트 \"가을 세일\"에 빠져 있다. 핵심만 담아도 된다고 볼 수도 있어 사람 확인이 필요하다.",
+        "en": "The banner text (up to 40% off, until Oct 31, free shipping, extra app discount) is missing from the alt text \"autumn sale\". A shorter alt could be acceptable, so a human should confirm."
+      },
+      "fix": {
+        "before": "id=\"promo-banner\" alt=\"가을 세일\"",
+        "after": "id=\"promo-banner\" alt=\"가을 시즌 최대 40% 할인. 10월 31일까지 전 상품 무료배송, 앱 첫 구매 5천원 추가 할인\""
+      }
+    },
+    {
+      "selector": "#site-logo",
+      "kwcag": "5.1.1",
+      "verdict": "pass",
+      "confidence": 0.97,
+      "reason": {
+        "ko": "로고 이미지의 대체 텍스트가 사이트 이름과 링크 목적(홈)을 함께 알려 준다.",
+        "en": "The logo alt text gives both the site name and the link purpose (home)."
+      }
+    },
+    {
+      "selector": "#detail-divider",
+      "kwcag": "5.1.1",
+      "verdict": "pass",
+      "confidence": 0.91,
+      "reason": {
+        "ko": "꾸밈용 구분선이라 빈 대체 텍스트(alt=\"\")가 맞다.",
+        "en": "This is a decorative divider, so an empty alt (alt=\"\") is correct."
+      }
+    },
+    {
+      "selector": "#fabric-detail",
+      "kwcag": "5.1.1",
+      "verdict": "pass",
+      "confidence": 0.88,
+      "reason": {
+        "ko": "원단 확대 사진의 색과 질감을 구체적으로 설명한다.",
+        "en": "The alt text describes the color and texture of the fabric close-up."
+      }
+    }
+  ],
+  "ruleFixes": [
+    {
+      "selector": "#cart-button",
+      "rule": "button-name",
+      "fix": {
+        "before": "<button type=\"button\" id=\"cart-button\" class=\"icon-btn\">",
+        "after": "<button type=\"button\" id=\"cart-button\" class=\"icon-btn\" aria-label=\"장바구니\">"
+      }
+    },
+    {
+      "selector": "#qty-input",
+      "rule": "label",
+      "fix": {
+        "before": "<span class=\"option-label\">수량</span>",
+        "after": "<label class=\"option-label\" for=\"qty-input\">수량</label>"
+      }
+    },
+    {
+      "selector": "#stock-status",
+      "rule": "color-contrast",
+      "fix": {
+        "before": ".stock { margin: 8px 0 0; font-size: 13px; color: rgb(194, 194, 194); }",
+        "after": ".stock { margin: 8px 0 0; font-size: 13px; color: rgb(107, 107, 107); }"
+      }
+    }
+  ]
+}

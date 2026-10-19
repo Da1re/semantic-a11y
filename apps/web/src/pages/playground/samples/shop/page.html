@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>린넨 오버핏 셔츠 | shop.example</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif; color: rgb(26, 26, 26); background: rgb(255, 255, 255); line-height: 1.5; word-break: keep-all; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  .site-header { border-bottom: 1px solid rgb(234, 234, 234); }
+  .site-header .wrap { display: flex; align-items: center; gap: 32px; height: 68px; }
+  .logo img { width: 150px; }
+  .gnb ul { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+  .gnb a { display: inline-block; padding: 8px 12px; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: 8px; }
+  .gnb a:hover { background: rgb(245, 245, 242); }
+  .gnb .sale { color: rgb(198, 40, 40); }
+  .util { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .util a { padding: 8px 10px; font-size: 14px; text-decoration: none; }
+  .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+  .icon-btn:hover { background: rgb(245, 245, 242); }
+  .logo { flex-shrink: 0; }
+  @media (max-width: 640px) {
+    .site-header .wrap { flex-wrap: wrap; height: auto; gap: 4px 12px; padding-top: 10px; padding-bottom: 6px; }
+    .gnb { order: 3; width: 100%; }
+    .gnb ul { flex-wrap: wrap; }
+  }
+
+  .promo { margin-top: 20px; }
+  .promo img { width: 100%; border-radius: 12px; }
+
+  .breadcrumb ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 20px 0 12px; padding: 0; list-style: none; font-size: 13px; color: rgb(107, 107, 107); }
+  .breadcrumb li + li::before { content: "›"; margin-right: 6px; }
+  .breadcrumb a { display: inline-block; padding: 3px 0; text-decoration: none; }
+
+  .product { display: grid; grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
+  @media (min-width: 760px) { .product { grid-template-columns: 1.05fr 1fr; gap: 48px; } }
+  .hero img { width: 100%; border-radius: 16px; background: rgb(241, 237, 229); }
+  .thumbs { display: flex; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
+  .thumb { padding: 0; border: 2px solid transparent; border-radius: 10px; background: none; cursor: pointer; }
+  .thumb.is-active { border-color: rgb(26, 26, 26); }
+  .thumb img { width: 72px; height: 84px; object-fit: cover; border-radius: 8px; }
+
+  .brand { margin: 0; font-size: 14px; font-weight: 600; color: rgb(31, 77, 58); }
+  .info h1 { margin: 6px 0 10px; font-size: 28px; line-height: 1.3; }
+  .rating { display: flex; align-items: center; gap: 6px; margin: 0 0 18px; font-size: 14px; color: rgb(85, 85, 85); }
+  .stars { color: rgb(184, 134, 11); letter-spacing: 1px; }
+  .price { display: flex; align-items: baseline; gap: 10px; margin: 0 0 24px; }
+  .price .rate { font-size: 22px; font-weight: 700; color: rgb(198, 40, 40); }
+  .price .now { font-size: 26px; font-weight: 800; }
+  .price del { font-size: 15px; color: rgb(117, 117, 117); }
+
+  .option { margin: 0 0 20px; }
+  .option-label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; }
+  .sizes { display: flex; gap: 8px; }
+  .size { min-width: 52px; height: 44px; border: 2px solid rgb(222, 222, 222); border-radius: 10px; background: rgb(255, 255, 255); font-size: 15px; font-weight: 600; color: inherit; cursor: pointer; }
+  .size.is-selected { border-color: rgb(31, 77, 58); }
+  .stock { margin: 8px 0 0; font-size: 13px; color: rgb(194, 194, 194); }
+
+  .qty { display: inline-flex; align-items: center; border: 1px solid rgb(210, 210, 210); border-radius: 10px; overflow: hidden; }
+  .qty button { width: 40px; height: 42px; border: 0; background: rgb(248, 248, 246); font-size: 18px; color: inherit; cursor: pointer; }
+  .qty input { width: 56px; height: 42px; border: 0; text-align: center; font-size: 15px; }
+
+  .actions { display: flex; gap: 8px; margin: 24px 0; }
+  .btn { flex: 1; height: 54px; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; }
+  .btn-line { border: 1px solid rgb(26, 26, 26); background: rgb(255, 255, 255); color: rgb(26, 26, 26); }
+  .btn-solid { border: 0; background: rgb(31, 77, 58); color: rgb(255, 255, 255); }
+  .actions .icon-btn { width: 54px; height: 54px; border: 1px solid rgb(210, 210, 210); border-radius: 12px; }
+
+  .facts { margin: 0; padding: 18px 0 0; border-top: 1px solid rgb(234, 234, 234); }
+  .facts div { display: flex; align-items: center; gap: 12px; padding: 6px 0; font-size: 14px; }
+  .facts dt { width: 72px; color: rgb(107, 107, 107); }
+  .facts dd { display: flex; flex: 1; align-items: center; margin: 0; }
+  .facts .more { display: inline-block; margin-left: auto; padding: 4px 2px; font-size: 13px; color: rgb(85, 85, 85); }
+
+  .tabs { position: sticky; top: 0; background: rgb(255, 255, 255); border-bottom: 1px solid rgb(234, 234, 234); }
+  .tabs ul { display: flex; margin: 0; padding: 0; list-style: none; }
+  .tabs a { display: inline-block; padding: 14px 20px; font-size: 15px; font-weight: 600; text-decoration: none; color: rgb(85, 85, 85); border-bottom: 3px solid transparent; }
+  .tabs a[aria-current="true"] { color: rgb(26, 26, 26); border-bottom-color: rgb(26, 26, 26); }
+
+  .section { padding: 40px 0; border-bottom: 1px solid rgb(234, 234, 234); }
+  .section h2 { margin: 0 0 16px; font-size: 20px; }
+  .detail-copy { max-width: 640px; margin: 0 0 24px; color: rgb(68, 68, 68); }
+  .divider { width: 240px; margin: 28px 0; }
+  .fabric { width: 100%; max-width: 640px; border-radius: 12px; }
+
+  .reviews { margin: 0; padding: 0; list-style: none; }
+  .review { padding: 18px 0; border-bottom: 1px solid rgb(240, 240, 240); }
+  .review-meta { display: flex; gap: 10px; font-size: 13px; color: rgb(107, 107, 107); }
+  .review p { margin: 6px 0 0; }
+  .more-reviews { display: inline-block; margin-top: 18px; padding: 10px 18px; border: 1px solid rgb(210, 210, 210); border-radius: 999px; background: none; font: inherit; font-size: 14px; font-weight: 600; color: inherit; cursor: pointer; }
+
+  .site-footer { padding: 32px 0 48px; background: rgb(247, 247, 244); font-size: 13px; color: rgb(85, 85, 85); }
+  .site-footer ul { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 12px; padding: 0; list-style: none; }
+  .site-footer a { display: inline-block; padding: 4px 0; text-decoration: none; font-weight: 600; }
+  .site-footer p { margin: 2px 0; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo"><img id="site-logo" alt="shop.example 홈" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 56' width='300' height='56'><circle cx='26' cy='28' r='18' fill='rgb(31,77,58)'/><path d='M18 30 q8 10 16 0' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/><text x='56' y='38' font-family='Georgia, serif' font-size='28' font-weight='700' fill='rgb(26,26,26)'>shop.example</text></svg>"></a>
+    <nav class="gnb" aria-label="카테고리">
+      <ul>
+        <li><a href="/new">신상품</a></li>
+        <li><a href="/top">상의</a></li>
+        <li><a href="/bottom">하의</a></li>
+        <li><a href="/outer">아우터</a></li>
+        <li><a href="/sale" class="sale">세일</a></li>
+      </ul>
+    </nav>
+    <div class="util">
+      <a href="/login">로그인</a>
+      <button type="button" class="icon-btn" aria-label="검색"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+      <button type="button" id="cart-button" class="icon-btn"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11h11l2-8H6.2"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="promo">
+    <img id="promo-banner" alt="가을 세일" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1032 110' width='1032' height='110'><rect width='1032' height='110' rx='12' fill='rgb(31,77,58)'/><circle cx='960' cy='20' r='70' fill='rgb(52,104,80)'/><circle cx='880' cy='110' r='46' fill='rgb(196,120,52)'/><text x='40' y='52' font-family='sans-serif' font-size='30' font-weight='800' fill='white'>가을 시즌 최대 40%25 할인</text><text x='40' y='84' font-family='sans-serif' font-size='18' fill='rgb(222,236,228)'>10월 31일까지 · 전 상품 무료배송 · 앱 첫 구매 5천원 추가 할인</text></svg>">
+  </div>
+
+  <nav class="breadcrumb" aria-label="현재 위치">
+    <ol>
+      <li><a href="/">홈</a></li>
+      <li><a href="/top">상의</a></li>
+      <li><a href="/top/shirts" aria-current="page">셔츠</a></li>
+    </ol>
+  </nav>
+
+  <section class="product" aria-labelledby="product-title">
+    <div class="gallery">
+      <div class="hero">
+        <img id="product-hero-img" alt="빨간 원피스" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 470' width='400' height='470'><rect width='400' height='470' fill='rgb(241,237,229)'/><ellipse cx='200' cy='440' rx='120' ry='10' fill='rgb(226,220,208)'/><path d='M150 80 L200 96 L250 80 L300 104 L356 160 L326 222 L292 204 L292 418 Q200 434 108 418 L108 204 L74 222 L44 160 L100 104 Z' fill='rgb(238,231,216)' stroke='rgb(196,186,166)' stroke-width='3' stroke-linejoin='round'/><path d='M150 80 L200 126 L250 80 L238 70 L200 104 L162 70 Z' fill='rgb(228,220,201)' stroke='rgb(196,186,166)' stroke-width='3' stroke-linejoin='round'/><path d='M200 126 L200 420' stroke='rgb(206,197,179)' stroke-width='3'/><g fill='rgb(176,165,144)'><circle cx='200' cy='160' r='5'/><circle cx='200' cy='212' r='5'/><circle cx='200' cy='264' r='5'/><circle cx='200' cy='316' r='5'/><circle cx='200' cy='368' r='5'/></g><rect x='226' y='176' width='42' height='48' rx='4' fill='none' stroke='rgb(206,197,179)' stroke-width='3'/><path d='M108 204 L74 222 M292 204 L326 222' stroke='rgb(196,186,166)' stroke-width='3'/></svg>">
+      </div>
+      <ul class="thumbs">
+        <li><button type="button" class="thumb is-active"><img id="thumb-front" alt="상품 이미지" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 470'><rect width='400' height='470' fill='rgb(241,237,229)'/><path d='M150 80 L200 96 L250 80 L300 104 L356 160 L326 222 L292 204 L292 418 Q200 434 108 418 L108 204 L74 222 L44 160 L100 104 Z' fill='rgb(238,231,216)' stroke='rgb(196,186,166)' stroke-width='6'/><path d='M200 110 L200 420' stroke='rgb(196,186,166)' stroke-width='6'/></svg>"></button></li>
+        <li><button type="button" class="thumb"><img id="thumb-back" alt="상품 이미지" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 470'><rect width='400' height='470' fill='rgb(233,228,218)'/><path d='M150 80 L200 90 L250 80 L300 104 L356 160 L326 222 L292 204 L292 418 Q200 434 108 418 L108 204 L74 222 L44 160 L100 104 Z' fill='rgb(232,224,207)' stroke='rgb(190,180,160)' stroke-width='6'/><path d='M120 150 Q200 170 280 150' stroke='rgb(190,180,160)' stroke-width='6' fill='none'/></svg>"></button></li>
+        <li><button type="button" class="thumb"><img id="thumb-fabric" alt="상품 이미지" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 470'><rect width='400' height='470' fill='rgb(236,229,214)'/><g stroke='rgb(210,200,180)' stroke-width='6'><path d='M0 40 H400'/><path d='M0 90 H180 M220 90 H400'/><path d='M0 140 H400'/><path d='M0 190 H90 M140 190 H400'/><path d='M0 240 H400'/><path d='M0 290 H260 M300 290 H400'/><path d='M0 340 H400'/><path d='M0 390 H120 M170 390 H400'/><path d='M0 440 H400'/></g></svg>"></button></li>
+      </ul>
+    </div>
+
+    <div class="info">
+      <p class="brand">shop.example 베이직</p>
+      <h1 id="product-title">린넨 오버핏 셔츠</h1>
+      <p class="rating"><span class="stars" role="img" aria-label="별점 5점 만점에 4.8점">★★★★★</span> 4.8 · 리뷰 128개</p>
+      <p class="price"><span class="rate">20%</span><span class="now">39,000원</span><del>49,000원</del></p>
+
+      <div class="option">
+        <span class="option-label">사이즈</span>
+        <div class="sizes">
+          <button type="button" id="size-s" class="size">S</button>
+          <button type="button" id="size-m" class="size is-selected">M</button>
+          <button type="button" id="size-l" class="size">L</button>
+          <button type="button" id="size-xl" class="size">XL</button>
+        </div>
+        <p id="stock-status" class="stock">XL 사이즈 품절 · 재입고 알림 신청 가능</p>
+      </div>
+
+      <div class="option">
+        <span class="option-label">수량</span>
+        <div class="qty">
+          <button type="button" aria-label="수량 줄이기">−</button>
+          <input id="qty-input" type="number" value="1" min="1" max="10">
+          <button type="button" aria-label="수량 늘리기">+</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="icon-btn" id="wish-button" aria-label="찜하기"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+        <button type="button" class="btn btn-line">장바구니 담기</button>
+        <button type="button" class="btn btn-solid">바로 구매</button>
+      </div>
+
+      <dl class="facts">
+        <div><dt>소재</dt><dd>린넨 100% <a id="more-material" class="more" href="/guide/material">자세히</a></dd></div>
+        <div><dt>사이즈</dt><dd>여유 있는 오버핏 <a id="more-size" class="more" href="/guide/size">자세히</a></dd></div>
+        <div><dt>배송</dt><dd>오늘 출발 · 무료배송 <a id="more-delivery" class="more" href="/guide/delivery">자세히</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <nav class="tabs" aria-label="상품 정보">
+    <ul>
+      <li><a href="#detail" aria-current="true">상세 정보</a></li>
+      <li><a href="#reviews">리뷰 128</a></li>
+      <li><a href="#qna">문의 12</a></li>
+    </ul>
+  </nav>
+
+  <section id="detail" class="section" aria-labelledby="detail-title">
+    <h2 id="detail-title">상세 정보</h2>
+    <p class="detail-copy">통기성이 좋은 린넨 100% 원단으로 만든 오버핏 셔츠입니다. 한 번 워싱해 처음부터 부드럽고, 단독으로 입거나 티셔츠 위에 가볍게 걸치기 좋습니다.</p>
+    <img id="detail-divider" class="divider" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 12' width='240' height='12'><path d='M0 6 H104 M136 6 H240' stroke='rgb(206,197,179)' stroke-width='2'/><path d='M120 0 L126 6 L120 12 L114 6 Z' fill='rgb(196,120,52)'/></svg>">
+    <img id="fabric-detail" class="fabric" alt="아이보리 린넨 원단을 가까이서 찍은 사진. 굵기가 고르지 않은 실이 자연스러운 결을 만든다" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 260' width='640' height='260'><rect width='640' height='260' fill='rgb(236,229,214)'/><g stroke='rgb(214,204,184)' stroke-width='5'><path d='M0 20 H640'/><path d='M0 48 H300 M340 48 H640'/><path d='M0 76 H640'/><path d='M0 104 H120 M170 104 H640'/><path d='M0 132 H640'/><path d='M0 160 H420 M470 160 H640'/><path d='M0 188 H640'/><path d='M0 216 H220 M262 216 H640'/><path d='M0 244 H640'/></g><g stroke='rgb(224,215,196)' stroke-width='3'><path d='M40 0 V260'/><path d='M150 0 V260'/><path d='M270 0 V260'/><path d='M390 0 V260'/><path d='M520 0 V260'/></g></svg>">
+  </section>
+
+  <section id="reviews" class="section" aria-labelledby="reviews-title">
+    <h2 id="reviews-title">리뷰 128</h2>
+    <ul class="reviews">
+      <li class="review">
+        <div class="review-meta"><span class="stars" role="img" aria-label="별점 5점">★★★★★</span><span>M 사이즈 구매</span><span>2026.10.12</span></div>
+        <p>생각보다 훨씬 얇고 시원해요. 키 170에 M 사이즈가 넉넉하게 맞습니다.</p>
+      </li>
+      <li class="review">
+        <div class="review-meta"><span class="stars" role="img" aria-label="별점 4점">★★★★☆</span><span>L 사이즈 구매</span><span>2026.10.08</span></div>
+        <p>색이 화면보다 조금 더 노란 편이에요. 구김은 린넨이라 어쩔 수 없네요.</p>
+      </li>
+    </ul>
+    <div id="more-reviews" class="more-reviews" onclick="loadMoreReviews()">리뷰 더보기</div>
+  </section>
+
+  <section id="qna" class="section" aria-labelledby="qna-title">
+    <h2 id="qna-title">상품 문의 12</h2>
+    <p class="detail-copy">구매 전 궁금한 점은 상품 문의로 남겨 주세요. 평일 오후 6시 전에 답변해 드립니다.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <ul>
+      <li><a href="/terms">이용약관</a></li>
+      <li><a href="/privacy">개인정보처리방침</a></li>
+      <li><a href="/help">고객센터</a></li>
+    </ul>
+    <p>shop.example은 웹 접근성 점검 시연을 위해 만든 가상의 쇼핑몰입니다.</p>
+    <p>실제 판매·결제는 이루어지지 않습니다.</p>
+  </div>
+</footer>
+</body>
+</html>

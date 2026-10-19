@@ -1,0 +1,186 @@
+{
+  "judgements": [
+    {
+      "selector": "#site-header",
+      "kwcag": "6.4.1",
+      "verdict": "fail",
+      "confidence": 0.82,
+      "severity": "moderate",
+      "reason": {
+        "ko": "본문 앞에 메뉴 링크와 검색 등 초점 받는 요소가 12개 있는데 \"본문 바로가기\" 링크가 없다. 키보드 사용자는 매번 이것을 모두 지나야 본문에 닿는다. axe는 제목(h1~h6)만 있으면 통과시킨다.",
+        "en": "There are 12 focusable items (menus, search) before the content but no \"skip to content\" link. Keyboard users must tab through all of them on every page. axe passes the page as long as it has headings."
+      },
+      "fix": {
+        "before": "<body>\n<nav class=\"topbar\"",
+        "after": "<body>\n<a class=\"skip-link\" href=\"#content\">본문 바로가기</a>\n<nav class=\"topbar\""
+      }
+    },
+    {
+      "selector": "title",
+      "kwcag": "6.4.2",
+      "verdict": "fail",
+      "confidence": 0.92,
+      "severity": "moderate",
+      "reason": {
+        "ko": "페이지 제목이 \"메인\"이라 공지 내용을 알 수 없다. 브라우저 탭이나 방문 기록에서 이 글을 구분할 수 없다.",
+        "en": "The page title is \"Main\", which says nothing about the notice. The page cannot be identified in browser tabs or history."
+      },
+      "fix": {
+        "before": "<title>메인 | city.example</title>",
+        "after": "<title>2026년 3분기 공공자전거 이용 통계와 겨울철 운영 안내 | 공지사항 | city.example</title>"
+      }
+    },
+    {
+      "selector": "#briefing-video",
+      "kwcag": "5.4.2",
+      "verdict": "fail",
+      "confidence": 0.9,
+      "severity": "serious",
+      "reason": {
+        "ko": "영상이 autoplay로 소리와 함께 자동 재생된다. 화면낭독기 음성과 겹쳐 페이지를 읽기 어렵다.",
+        "en": "The video autoplays with sound, which talks over screen reader speech and makes the page hard to use."
+      },
+      "fix": {
+        "before": "src=\"/media/briefing-2026q3.mp4\" autoplay controls",
+        "after": "src=\"/media/briefing-2026q3.mp4\" controls"
+      }
+    },
+    {
+      "selector": "#briefing-video",
+      "kwcag": "5.2.1",
+      "verdict": "fail",
+      "confidence": 0.74,
+      "severity": "critical",
+      "reason": {
+        "ko": "영상에 자막 트랙(track kind=\"captions\")이 없어 청각장애 사용자가 브리핑 내용을 알 수 없다. axe는 자막 유무를 확정하지 못해 \"확인 필요\"로 넘겼다.",
+        "en": "The video has no caption track (track kind=\"captions\"), so deaf users miss the briefing. axe could not decide and marked it \"needs review\"."
+      },
+      "fix": {
+        "before": "          영상을 재생할 수 없는 브라우저입니다.",
+        "after": "          <track kind=\"captions\" src=\"/media/briefing-2026q3.ko.vtt\" srclang=\"ko\" label=\"한국어\" default>\n          영상을 재생할 수 없는 브라우저입니다."
+      }
+    },
+    {
+      "selector": "#usage-chart",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.95,
+      "severity": "serious",
+      "reason": {
+        "ko": "막대그래프의 대체 텍스트가 \"그래프\"뿐이다. 7~9월 대여 건수(37,020 → 39,150 → 52,370건)와 9월에 크게 늘었다는 핵심이 전달되지 않는다.",
+        "en": "The bar chart alt text is just \"graph\". The monthly rentals (37,020 → 39,150 → 52,370) and the September jump are not conveyed."
+      },
+      "fix": {
+        "before": "id=\"usage-chart\" alt=\"그래프\"",
+        "after": "id=\"usage-chart\" alt=\"월별 대여 건수 막대그래프. 7월 37,020건, 8월 39,150건, 9월 52,370건으로 9월에 가장 많이 늘었다\""
+      }
+    },
+    {
+      "selector": "#stats-table",
+      "kwcag": "5.3.1",
+      "verdict": "fail",
+      "confidence": 0.87,
+      "severity": "serious",
+      "reason": {
+        "ko": "첫 행을 굵게만 처리했고 제목 셀(th)이 없다. 화면낭독기는 \"39,150\"이 몇 월의 어떤 값인지 알려 주지 못한다. axe는 제목 셀이 하나도 없으면 레이아웃용 표로 보고 넘어간다.",
+        "en": "The first row is only styled bold and there are no header cells (th). A screen reader cannot tell which month and measure \"39,150\" belongs to. axe treats a table with no header cells as a layout table and skips it."
+      },
+      "fix": {
+        "before": "<table id=\"stats-table\">\n        <tr class=\"fake-head\"><td>구분</td><td>7월</td><td>8월</td><td>9월</td></tr>\n        <tr><td>대여 건수</td><td>37,020</td><td>39,150</td><td>52,370</td></tr>\n        <tr><td>평균 이용 시간</td><td>21분</td><td>19분</td><td>24분</td></tr>\n        <tr><td>신규 가입자</td><td>2,140</td><td>1,980</td><td>3,410</td></tr>\n      </table>",
+        "after": "<table id=\"stats-table\">\n        <caption>월별 공공자전거 이용 현황</caption>\n        <thead><tr><th scope=\"col\">구분</th><th scope=\"col\">7월</th><th scope=\"col\">8월</th><th scope=\"col\">9월</th></tr></thead>\n        <tbody>\n          <tr><th scope=\"row\">대여 건수</th><td>37,020</td><td>39,150</td><td>52,370</td></tr>\n          <tr><th scope=\"row\">평균 이용 시간</th><td>21분</td><td>19분</td><td>24분</td></tr>\n          <tr><th scope=\"row\">신규 가입자</th><td>2,140</td><td>1,980</td><td>3,410</td></tr>\n        </tbody>\n      </table>"
+      }
+    },
+    {
+      "selector": "#guide-link",
+      "kwcag": "6.4.3",
+      "verdict": "fail",
+      "confidence": 0.9,
+      "severity": "moderate",
+      "reason": {
+        "ko": "링크 텍스트가 \"여기\"뿐이라 목적을 알 수 없고, 새 창으로 열린다는 안내도 없다.",
+        "en": "The link text is just \"here\", which does not describe its purpose, and it opens a new window without notice."
+      },
+      "fix": {
+        "before": "자세한 이용 방법은 <a id=\"guide-link\" href=\"https://bike.city.example/guide\" target=\"_blank\">여기</a>를 눌러 확인하세요.",
+        "after": "자세한 내용은 <a id=\"guide-link\" href=\"https://bike.city.example/guide\" target=\"_blank\">공공자전거 겨울철 이용 방법 (새 창)</a>에서 확인하세요."
+      }
+    },
+    {
+      "selector": "#app-qr",
+      "kwcag": "5.1.1",
+      "verdict": "fail",
+      "confidence": 0.66,
+      "severity": "moderate",
+      "reason": {
+        "ko": "QR코드의 대체 텍스트가 \"QR코드\"뿐이라 어디로 연결되는지 알 수 없다. 옆 문장이 앱 설치를 설명하지만 주소가 없어서, 링크를 따로 줘야 하는지 사람 확인이 필요하다.",
+        "en": "The QR code alt text is just \"QR code\", so its destination is unknown. The nearby sentence mentions the app but gives no address, so a human should decide whether a separate link is needed."
+      },
+      "fix": {
+        "before": "id=\"app-qr\" alt=\"QR코드\"",
+        "after": "id=\"app-qr\" alt=\"공공자전거 앱 설치 페이지(app.city.example)로 연결되는 QR코드\""
+      }
+    },
+    {
+      "selector": "#station-table",
+      "kwcag": "5.3.1",
+      "verdict": "pass",
+      "confidence": 0.93,
+      "reason": {
+        "ko": "caption과 열·행 제목 셀(th scope)을 갖춰 각 값의 의미가 전달된다.",
+        "en": "The table has a caption and column/row header cells (th scope), so every value is understandable."
+      }
+    },
+    {
+      "selector": "#attach-hwp",
+      "kwcag": "6.4.3",
+      "verdict": "pass",
+      "confidence": 0.9,
+      "reason": {
+        "ko": "링크 텍스트에 파일 이름, 형식, 크기, 동작(내려받기)이 모두 들어 있다.",
+        "en": "The link text includes the file name, format, size and action (download)."
+      }
+    }
+  ],
+  "ruleFixes": [
+    {
+      "selector": "#footer-emblem",
+      "rule": "image-alt",
+      "fix": {
+        "before": "<img id=\"footer-emblem\" src=",
+        "after": "<img id=\"footer-emblem\" alt=\"\" src="
+      }
+    },
+    {
+      "selector": "#survey-good",
+      "rule": "label",
+      "fix": {
+        "before": "<span><input id=\"survey-good\" type=\"radio\" name=\"survey\" value=\"good\">만족</span>",
+        "after": "<label><input id=\"survey-good\" type=\"radio\" name=\"survey\" value=\"good\">만족</label>"
+      }
+    },
+    {
+      "selector": "#survey-normal",
+      "rule": "label",
+      "fix": {
+        "before": "<span><input id=\"survey-normal\" type=\"radio\" name=\"survey\" value=\"normal\">보통</span>",
+        "after": "<label><input id=\"survey-normal\" type=\"radio\" name=\"survey\" value=\"normal\">보통</label>"
+      }
+    },
+    {
+      "selector": "#survey-bad",
+      "rule": "label",
+      "fix": {
+        "before": "<span><input id=\"survey-bad\" type=\"radio\" name=\"survey\" value=\"bad\">불만족</span>",
+        "after": "<label><input id=\"survey-bad\" type=\"radio\" name=\"survey\" value=\"bad\">불만족</label>"
+      }
+    },
+    {
+      "selector": "#share-link",
+      "rule": "link-name",
+      "fix": {
+        "before": "<a id=\"share-link\" class=\"tool\" href=\"/share?id=2026-1015\">",
+        "after": "<a id=\"share-link\" class=\"tool\" href=\"/share?id=2026-1015\" aria-label=\"공유하기\">"
+      }
+    }
+  ]
+}

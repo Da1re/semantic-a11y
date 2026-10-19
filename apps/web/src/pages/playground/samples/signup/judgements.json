@@ -1,0 +1,160 @@
+{
+  "judgements": [
+    {
+      "selector": "#required-note",
+      "kwcag": "5.4.1",
+      "verdict": "fail",
+      "confidence": 0.88,
+      "severity": "serious",
+      "reason": {
+        "ko": "필수 항목을 빨간 글자색으로만 구분한다. 색을 구분하기 어려운 사용자는 어떤 칸이 필수인지 알 수 없다.",
+        "en": "Required fields are marked only by red label color. Users who cannot distinguish colors cannot tell which fields are required."
+      },
+      "fix": {
+        "before": ".field > label.req { color: rgb(198, 40, 40); }",
+        "after": ".field > label.req { color: rgb(198, 40, 40); }\n  .field > label.req::after { content: \" (필수)\"; font-weight: 400; }"
+      }
+    },
+    {
+      "selector": "#name",
+      "kwcag": "7.3.2",
+      "verdict": "fail",
+      "confidence": 0.9,
+      "severity": "serious",
+      "reason": {
+        "ko": "레이블 없이 placeholder \"이름\"만 있다. 입력을 시작하면 안내가 사라지고, 보조기술에 따라 이름으로 읽지 않는다. axe는 placeholder를 이름으로 인정해 통과시킨다.",
+        "en": "The field has only the placeholder \"name\" and no label. The hint disappears once typing starts and some assistive technologies do not read it as a name. axe accepts the placeholder and passes it."
+      },
+      "fix": {
+        "before": "<input id=\"name\" class=\"input\" type=\"text\" name=\"name\" autocomplete=\"name\" placeholder=\"이름\">",
+        "after": "<label for=\"name\" class=\"req\">이름</label>\n        <input id=\"name\" class=\"input\" type=\"text\" name=\"name\" autocomplete=\"name\">"
+      }
+    },
+    {
+      "selector": "#birth",
+      "kwcag": "7.3.2",
+      "verdict": "fail",
+      "confidence": 0.88,
+      "severity": "serious",
+      "reason": {
+        "ko": "레이블 없이 placeholder로만 생년월일 형식을 안내한다. 입력을 시작하면 형식 안내가 사라진다.",
+        "en": "The date-of-birth field relies on a placeholder for both its name and format. The format hint disappears once typing starts."
+      },
+      "fix": {
+        "before": "<input id=\"birth\" class=\"input\" type=\"text\" name=\"birth\" inputmode=\"numeric\" autocomplete=\"bday\" placeholder=\"생년월일 8자리 (예: 19990101)\">",
+        "after": "<label for=\"birth\">생년월일 8자리</label>\n        <input id=\"birth\" class=\"input\" type=\"text\" name=\"birth\" inputmode=\"numeric\" autocomplete=\"bday\" placeholder=\"예: 19990101\">"
+      }
+    },
+    {
+      "selector": "#pw",
+      "kwcag": "5.3.3",
+      "verdict": "fail",
+      "confidence": 0.81,
+      "severity": "moderate",
+      "reason": {
+        "ko": "비밀번호 규칙을 \"오른쪽 안내를 참고해 주세요\"처럼 위치로만 가리킨다. 화면이 좁거나 화면낭독기를 쓰면 \"오른쪽\"이 어디인지 알 수 없고, 규칙이 입력칸과 연결(aria-describedby)돼 있지 않다.",
+        "en": "The password rules are referenced only by position (\"see the guide on the right\"). On narrow screens or with a screen reader \"right\" has no meaning, and the rules are not linked to the field (aria-describedby)."
+      },
+      "fix": {
+        "before": "<input id=\"pw\" class=\"input\" type=\"password\" name=\"password\" autocomplete=\"new-password\">\n        <p class=\"hint\">오른쪽 안내를 참고해 주세요.</p>",
+        "after": "<input id=\"pw\" class=\"input\" type=\"password\" name=\"password\" autocomplete=\"new-password\" aria-describedby=\"pw-hint\">\n        <p id=\"pw-hint\" class=\"hint\">영문·숫자·특수문자를 섞어 8~16자로 입력해 주세요.</p>"
+      }
+    },
+    {
+      "selector": "#phone",
+      "kwcag": "7.3.1",
+      "verdict": "fail",
+      "confidence": 0.83,
+      "severity": "serious",
+      "reason": {
+        "ko": "휴대폰 번호 칸을 빨간 테두리로만 오류 표시하고 무엇이 틀렸는지 알려 주지 않는다. 오류 상태도 보조기술에 전달되지 않는다(aria-invalid 없음).",
+        "en": "The phone field signals an error only with a red border and does not say what is wrong. The error state is not exposed to assistive technology (no aria-invalid)."
+      },
+      "fix": {
+        "before": "autocomplete=\"tel\" value=\"010-12\">\n        </div>",
+        "after": "autocomplete=\"tel\" value=\"010-12\" aria-invalid=\"true\" aria-describedby=\"phone-error\">\n        </div>\n        <p id=\"phone-error\" class=\"error-text\">휴대폰 번호 11자리를 입력해 주세요. (예: 010-1234-5678)</p>"
+      }
+    },
+    {
+      "selector": "#country",
+      "kwcag": "7.2.1",
+      "verdict": "fail",
+      "confidence": 0.86,
+      "severity": "serious",
+      "reason": {
+        "ko": "국가/지역을 고르기만 해도 onchange로 페이지가 바뀐다. 키보드로 목록을 훑는 중에 예고 없이 이동해 입력한 내용을 잃을 수 있다.",
+        "en": "Changing the country selection immediately navigates via onchange. Keyboard users browsing the options are moved away without warning and may lose their input."
+      },
+      "fix": {
+        "before": "<select id=\"country\" name=\"country\" onchange=\"location.href='/signup?country=' + this.value\">",
+        "after": "<select id=\"country\" name=\"country\">"
+      }
+    },
+    {
+      "selector": "#captcha-img",
+      "kwcag": "7.3.3",
+      "verdict": "fail",
+      "confidence": 0.79,
+      "severity": "critical",
+      "reason": {
+        "ko": "왜곡된 글자를 읽어 입력하는 이미지 보안문자만 있다. 화면낭독기·저시력 사용자가 통과할 다른 방법(음성, 문자 인증 등)이 없다.",
+        "en": "Only an image CAPTCHA with distorted characters is offered. Screen reader and low-vision users have no alternative such as audio or SMS verification."
+      },
+      "fix": {
+        "before": "<input id=\"captcha-input\" class=\"input\" type=\"text\" name=\"captcha\" autocomplete=\"off\">",
+        "after": "<input id=\"captcha-input\" class=\"input\" type=\"text\" name=\"captcha\" autocomplete=\"off\">\n        <p class=\"hint\">보안문자를 읽기 어렵다면 <a href=\"/captcha/audio\">음성으로 듣기</a> 또는 <a href=\"/verify/sms\">문자 인증</a>을 이용해 주세요.</p>"
+      }
+    },
+    {
+      "selector": "#terms-link",
+      "kwcag": "7.2.1",
+      "verdict": "fail",
+      "confidence": 0.64,
+      "severity": "moderate",
+      "reason": {
+        "ko": "\"약관 보기\"가 새 창으로 열리는데 안내가 없다. 다만 사용자가 직접 누르는 링크라 기준 해석이 갈릴 수 있어 사람 확인이 필요하다.",
+        "en": "\"View terms\" opens a new window without notice. Because the user activates it directly, interpretations differ, so a human should confirm."
+      },
+      "fix": {
+        "before": "target=\"_blank\">약관 보기</a>",
+        "after": "target=\"_blank\">약관 보기 (새 창)</a>"
+      }
+    },
+    {
+      "selector": "#signup-steps",
+      "kwcag": "5.4.1",
+      "verdict": "pass",
+      "confidence": 0.9,
+      "reason": {
+        "ko": "현재 단계를 색뿐 아니라 \"현재\" 글자와 aria-current로도 알려 준다.",
+        "en": "The current step is conveyed by the word \"current\" and aria-current, not only by color."
+      }
+    }
+  ],
+  "ruleFixes": [
+    {
+      "selector": "#carrier",
+      "rule": "select-name",
+      "fix": {
+        "before": "<select id=\"carrier\" name=\"carrier\">",
+        "after": "<select id=\"carrier\" name=\"carrier\" aria-label=\"통신사\">"
+      }
+    },
+    {
+      "selector": "#pw-confirm-error",
+      "rule": "color-contrast",
+      "fix": {
+        "before": ".error-text { margin: 6px 0 0; font-size: 13px; color: rgb(240, 150, 150); }",
+        "after": ".error-text { margin: 6px 0 0; font-size: 13px; color: rgb(198, 40, 40); }"
+      }
+    },
+    {
+      "selector": "#captcha-refresh",
+      "rule": "button-name",
+      "fix": {
+        "before": "<button type=\"button\" id=\"captcha-refresh\" class=\"icon-btn\">",
+        "after": "<button type=\"button\" id=\"captcha-refresh\" class=\"icon-btn\" aria-label=\"보안문자 새로고침\">"
+      }
+    }
+  ]
+}

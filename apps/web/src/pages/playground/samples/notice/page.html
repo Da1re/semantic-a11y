@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>메인 | city.example</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif; color: rgb(30, 30, 30); background: rgb(255, 255, 255); line-height: 1.6; word-break: keep-all; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; height: auto; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  .skip-link { position: absolute; left: 16px; top: -60px; z-index: 10; padding: 10px 16px; border-radius: 8px; background: rgb(250, 204, 21); color: rgb(15, 23, 42); font-weight: 700; }
+  .skip-link:focus { top: 8px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .topbar { background: rgb(15, 52, 96); color: rgb(255, 255, 255); font-size: 13px; }
+  .topbar ul { display: flex; justify-content: flex-end; gap: 4px; margin: 0; padding: 4px 0; list-style: none; }
+  .topbar a { display: inline-block; padding: 4px 10px; text-decoration: none; }
+
+  .site-header { border-bottom: 2px solid rgb(15, 52, 96); }
+  .site-header .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; padding-top: 14px; padding-bottom: 14px; }
+  .logo img { width: 220px; }
+  .gnb ul { display: flex; flex-wrap: wrap; gap: 2px; margin: 0; padding: 0; list-style: none; }
+  .gnb a { display: inline-block; padding: 8px 12px; font-size: 16px; font-weight: 700; text-decoration: none; }
+  .search { display: flex; margin-left: auto; }
+  .search input { width: 180px; height: 40px; padding: 0 12px; border: 1px solid rgb(148, 163, 184); border-right: 0; border-radius: 8px 0 0 8px; font: inherit; font-size: 14px; }
+  .search button { height: 40px; padding: 0 14px; border: 0; border-radius: 0 8px 8px 0; background: rgb(15, 52, 96); color: rgb(255, 255, 255); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+
+  .breadcrumb ol { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; font-size: 13px; color: rgb(85, 85, 85); }
+  .breadcrumb li + li::before { content: ">"; margin-right: 6px; }
+  .breadcrumb a { display: inline-block; padding: 2px 0; text-decoration: none; }
+
+  .article-head { padding: 22px 0 18px; border-bottom: 1px solid rgb(226, 226, 226); }
+  .category { display: inline-block; padding: 2px 10px; border-radius: 999px; background: rgb(232, 240, 250); color: rgb(15, 52, 96); font-size: 13px; font-weight: 700; }
+  .article-head h1 { margin: 10px 0 12px; font-size: 26px; line-height: 1.35; }
+  .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; margin: 0; font-size: 14px; color: rgb(85, 85, 85); }
+  .meta div { display: flex; gap: 6px; }
+  .meta dd { margin: 0; color: rgb(30, 30, 30); }
+  .tools { display: flex; gap: 6px; margin-left: auto; }
+  .tool { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid rgb(203, 213, 225); border-radius: 8px; background: rgb(255, 255, 255); color: inherit; cursor: pointer; }
+
+  .body { padding: 28px 0; }
+  .body h2 { margin: 36px 0 12px; font-size: 20px; }
+  .body p { margin: 0 0 14px; }
+  .video video { width: 100%; max-width: 720px; border-radius: 12px; background: rgb(15, 23, 42); }
+  .chart { max-width: 720px; margin: 8px 0 18px; padding: 16px; border: 1px solid rgb(226, 226, 226); border-radius: 12px; }
+
+  table { width: 100%; max-width: 720px; border-collapse: collapse; margin: 0 0 18px; font-size: 15px; }
+  caption { margin-bottom: 8px; text-align: left; font-weight: 700; }
+  th, td { padding: 10px 12px; border: 1px solid rgb(214, 214, 214); text-align: center; }
+  th { background: rgb(241, 245, 249); }
+  .fake-head td { background: rgb(241, 245, 249); font-weight: 700; }
+
+  .guide { padding: 16px 18px; border-left: 4px solid rgb(15, 52, 96); background: rgb(248, 250, 252); }
+  .qr { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+  .qr img { width: 96px; border: 1px solid rgb(226, 226, 226); }
+
+  .files { margin: 28px 0 0; padding: 16px 18px; border: 1px solid rgb(226, 226, 226); border-radius: 12px; }
+  .files h2 { margin: 0 0 6px; font-size: 16px; }
+  .files ul { margin: 0; padding-left: 18px; }
+  .files a { display: inline-block; padding: 3px 0; }
+
+  .survey { margin: 28px 0 0; padding: 18px; border-radius: 12px; background: rgb(241, 245, 249); }
+  .survey h2 { margin: 0 0 10px; font-size: 16px; }
+  .survey .choices { display: flex; flex-wrap: wrap; gap: 18px; font-size: 15px; }
+  .survey .choices > * { display: inline-flex; align-items: center; gap: 6px; }
+  .survey input { width: 20px; height: 20px; margin: 0; }
+  .survey button { margin-top: 12px; height: 40px; padding: 0 18px; border: 0; border-radius: 8px; background: rgb(15, 52, 96); color: rgb(255, 255, 255); font: inherit; font-weight: 700; cursor: pointer; }
+
+  .pager { margin: 28px 0 48px; padding: 0; border-top: 1px solid rgb(226, 226, 226); list-style: none; }
+  .pager li { display: flex; gap: 16px; padding: 12px 4px; border-bottom: 1px solid rgb(226, 226, 226); font-size: 15px; }
+  .pager span { width: 64px; color: rgb(85, 85, 85); }
+  .pager a { text-decoration: none; }
+
+  .site-footer { padding: 28px 0 40px; background: rgb(30, 41, 59); color: rgb(226, 232, 240); font-size: 13px; }
+  .site-footer .wrap { display: flex; align-items: center; gap: 20px; }
+  .site-footer img { width: 56px; }
+  .site-footer p { margin: 2px 0; }
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="사용자 메뉴">
+  <div class="wrap">
+    <ul>
+      <li><a href="/login">로그인</a></li>
+      <li><a href="/join">회원가입</a></li>
+      <li><a href="/sitemap">사이트맵</a></li>
+      <li><a href="/en" lang="en">English</a></li>
+    </ul>
+  </div>
+</nav>
+<header id="site-header" class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo"><img id="site-logo" alt="city.example 시민소통 포털 홈" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 440 64' width='440' height='64'><rect x='4' y='8' width='48' height='48' rx='12' fill='rgb(15,52,96)'/><path d='M14 44 L28 18 L42 44 Z' fill='rgb(250,204,21)'/><text x='66' y='30' font-family='sans-serif' font-size='16' fill='rgb(71,85,105)'>city.example</text><text x='66' y='54' font-family='sans-serif' font-size='24' font-weight='800' fill='rgb(15,52,96)'>시민소통 포털</text></svg>"></a>
+    <nav class="gnb" aria-label="주 메뉴">
+      <ul>
+        <li><a href="/news">소식·공지</a></li>
+        <li><a href="/participate">시민참여</a></li>
+        <li><a href="/info">분야별 정보</a></li>
+        <li><a href="/open">정보공개</a></li>
+        <li><a href="/about">기관 소개</a></li>
+      </ul>
+    </nav>
+    <form class="search" action="/search" role="search">
+      <label for="site-search" class="sr-only">통합검색</label>
+      <input id="site-search" type="search" name="q">
+      <button type="submit">검색</button>
+    </form>
+  </div>
+</header>
+
+<main id="content" class="wrap">
+  <nav class="breadcrumb" aria-label="현재 위치">
+    <ol>
+      <li><a href="/">홈</a></li>
+      <li><a href="/news">소식·공지</a></li>
+      <li><a href="/news/notice" aria-current="page">공지사항</a></li>
+    </ol>
+  </nav>
+
+  <article>
+    <div class="article-head">
+      <span class="category">교통</span>
+      <h1>2026년 3분기 공공자전거 이용 통계와 겨울철 운영 안내</h1>
+      <div class="meta-row">
+        <dl class="meta">
+          <div><dt>담당 부서</dt><dd>교통정책과</dd></div>
+          <div><dt>작성일</dt><dd>2026.10.15</dd></div>
+          <div><dt>조회</dt><dd>1,284</dd></div>
+        </dl>
+        <div class="tools">
+          <a id="share-link" class="tool" href="/share?id=2026-1015"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4M8.6 13.4l6.8 4"/></svg></a>
+          <button type="button" class="tool" aria-label="인쇄"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="body">
+      <p>3분기(7~9월) 공공자전거 대여 건수는 모두 128,540건으로 지난해 같은 기간보다 14% 늘었습니다. 출퇴근 시간대 이용이 크게 늘었고, 9월에는 하천변 대여소 이용이 가장 많았습니다.</p>
+
+      <h2>영상으로 보는 3분기 이용 현황</h2>
+      <div class="video">
+        <video id="briefing-video" src="/media/briefing-2026q3.mp4" autoplay controls width="720" height="405" poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 720 405' width='720' height='405'><rect width='720' height='405' fill='rgb(15,52,96)'/><circle cx='600' cy='80' r='120' fill='rgb(29,78,140)'/><text x='48' y='120' font-family='sans-serif' font-size='22' fill='rgb(186,210,240)'>교통정책과 브리핑</text><text x='48' y='168' font-family='sans-serif' font-size='36' font-weight='800' fill='white'>3분기 공공자전거 이용 현황</text><circle cx='360' cy='280' r='44' fill='rgba(255,255,255,0.9)'/><path d='M346 258 L382 280 L346 302 Z' fill='rgb(15,52,96)'/><text x='48' y='204' font-family='sans-serif' font-size='18' fill='rgb(186,210,240)'>재생 시간 2분 40초</text></svg>">
+          영상을 재생할 수 없는 브라우저입니다.
+        </video>
+      </div>
+
+      <h2>월별 대여 건수</h2>
+      <div class="chart">
+        <img id="usage-chart" alt="그래프" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 680 300' width='680' height='300'><rect width='680' height='300' fill='white'/><g stroke='rgb(226,232,240)'><path d='M60 40 H660'/><path d='M60 100 H660'/><path d='M60 160 H660'/><path d='M60 220 H660'/></g><path d='M60 260 H660' stroke='rgb(100,116,139)' stroke-width='2'/><g font-family='sans-serif' font-size='13' fill='rgb(71,85,105)' text-anchor='end'><text x='50' y='264'>0</text><text x='50' y='204'>15,000</text><text x='50' y='144'>30,000</text><text x='50' y='84'>45,000</text></g><rect x='120' y='112' width='90' height='148' rx='6' fill='rgb(147,180,224)'/><rect x='300' y='104' width='90' height='156' rx='6' fill='rgb(96,140,204)'/><rect x='480' y='80' width='90' height='180' rx='6' fill='rgb(15,52,96)'/><g font-family='sans-serif' font-size='15' font-weight='700' fill='rgb(30,30,30)' text-anchor='middle'><text x='165' y='102'>37,020</text><text x='345' y='94'>39,150</text><text x='525' y='70'>52,370</text></g><g font-family='sans-serif' font-size='15' fill='rgb(51,65,85)' text-anchor='middle'><text x='165' y='284'>7월</text><text x='345' y='284'>8월</text><text x='525' y='284'>9월</text></g></svg>">
+      </div>
+
+      <table id="stats-table">
+        <tr class="fake-head"><td>구분</td><td>7월</td><td>8월</td><td>9월</td></tr>
+        <tr><td>대여 건수</td><td>37,020</td><td>39,150</td><td>52,370</td></tr>
+        <tr><td>평균 이용 시간</td><td>21분</td><td>19분</td><td>24분</td></tr>
+        <tr><td>신규 가입자</td><td>2,140</td><td>1,980</td><td>3,410</td></tr>
+      </table>
+
+      <h2>이용이 많은 대여소</h2>
+      <table id="station-table">
+        <caption>9월 대여소별 이용 순위 (상위 3곳)</caption>
+        <thead><tr><th scope="col">순위</th><th scope="col">대여소</th><th scope="col">대여 건수</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1</th><td>하천공원 입구</td><td>4,812</td></tr>
+          <tr><th scope="row">2</th><td>시청역 3번 출구</td><td>3,975</td></tr>
+          <tr><th scope="row">3</th><td>중앙도서관 앞</td><td>3,402</td></tr>
+        </tbody>
+      </table>
+
+      <h2>겨울철 운영 안내</h2>
+      <div class="guide">
+        <p>12월 1일부터 2월 28일까지는 오전 6시부터 밤 11시까지만 대여할 수 있습니다. 눈이 5cm 이상 쌓이면 해당 지역 대여소는 임시로 운영을 멈춥니다.</p>
+        <p>자세한 이용 방법은 <a id="guide-link" href="https://bike.city.example/guide" target="_blank">여기</a>를 눌러 확인하세요.</p>
+        <div class="qr">
+          <img id="app-qr" alt="QR코드" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 21' width='96' height='96' shape-rendering='crispEdges'><rect width='21' height='21' fill='white'/><g fill='black'><path d='M0 0h7v7H0z M1 1v5h5V1z M2 2h3v3H2z'/><path d='M14 0h7v7h-7z M15 1v5h5V1z M16 2h3v3h-3z'/><path d='M0 14h7v7H0z M1 15v5h5v-5z M2 16h3v3H2z'/><path d='M8 0h1v1H8z M10 1h2v1h-2z M9 3h1v2H9z M11 4h2v1h-2z M8 6h1v2H8z M10 7h3v1h-3z M8 9h2v1H8z M12 9h1v3h-1z M14 8h2v1h-2z M17 9h3v1h-3z M15 11h1v2h-1z M18 12h2v1h-2z M9 12h2v1H9z M8 14h1v2H8z M10 15h2v1h-2z M13 14h1v1h-1z M15 15h3v1h-3z M19 15h1v3h-1z M9 17h1v3H9z M11 18h3v1h-3z M15 19h2v1h-2z M17 17h1v1h-1z M0 9h2v1H0z M3 10h2v1H3z M1 12h3v1H1z M5 12h1v1H5z'/></g></svg>">
+          <p>공공자전거 앱을 설치하면 대여소별 남은 자전거 수를 바로 볼 수 있습니다.</p>
+        </div>
+      </div>
+
+      <section class="files" aria-labelledby="files-title">
+        <h2 id="files-title">첨부파일</h2>
+        <ul>
+          <li><a id="attach-hwp" href="/files/2026q3-bike-stats.hwp">3분기 공공자전거 이용 통계 (HWP, 128KB) 내려받기</a></li>
+        </ul>
+      </section>
+
+      <section class="survey" aria-labelledby="survey-title">
+        <h2 id="survey-title">이 페이지의 정보에 만족하십니까?</h2>
+        <div class="choices">
+          <span><input id="survey-good" type="radio" name="survey" value="good">만족</span>
+          <span><input id="survey-normal" type="radio" name="survey" value="normal">보통</span>
+          <span><input id="survey-bad" type="radio" name="survey" value="bad">불만족</span>
+        </div>
+        <button type="button">평가하기</button>
+      </section>
+    </div>
+  </article>
+
+  <ul class="pager">
+    <li><span>이전 글</span><a href="/news/notice/1014">10월 시민 자전거 안전교육 신청 안내</a></li>
+    <li><span>다음 글</span><a href="/news/notice/1016">하천공원 산책로 야간 조명 교체 공사 안내</a></li>
+  </ul>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <img id="footer-emblem" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56' width='56' height='56'><rect width='56' height='56' rx='14' fill='rgb(226,232,240)'/><path d='M12 42 L28 14 L44 42 Z' fill='rgb(15,52,96)'/></svg>">
+    <div>
+      <p>city.example 시민소통 포털은 웹 접근성 점검 시연을 위해 만든 가상의 기관 사이트입니다.</p>
+      <p>실제 기관·통계와 관계없습니다.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

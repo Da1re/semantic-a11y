@@ -1,0 +1,119 @@
+[
+  {
+    "id": "signup-01",
+    "selector": "#carrier",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "select-name",
+    "answer": "fail",
+    "note": "통신사 선택 상자에 레이블이 없다"
+  },
+  {
+    "id": "signup-02",
+    "selector": "#pw-confirm-error",
+    "kwcag": "5.4.3",
+    "judgedBy": "rule",
+    "rule": "color-contrast",
+    "answer": "fail",
+    "note": "오류 문구 대비 부족"
+  },
+  {
+    "id": "signup-03",
+    "selector": "#captcha-refresh",
+    "kwcag": "5.1.1",
+    "judgedBy": "rule",
+    "rule": "button-name",
+    "answer": "fail",
+    "note": "보안문자 새로고침 아이콘 버튼에 이름이 없다"
+  },
+  {
+    "id": "signup-04",
+    "selector": "#email",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "pass",
+    "note": "이메일 입력칸 레이블 정상"
+  },
+  {
+    "id": "signup-05",
+    "selector": "#agree-terms",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "pass",
+    "note": "약관 동의 체크박스 레이블 정상"
+  },
+  {
+    "id": "signup-06",
+    "selector": "#required-note",
+    "kwcag": "5.4.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "필수 항목을 빨간 글자색으로만 구분"
+  },
+  {
+    "id": "signup-07",
+    "selector": "#name",
+    "kwcag": "7.3.2",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "placeholder만 있는 입력칸(axe는 통과)"
+  },
+  {
+    "id": "signup-08",
+    "selector": "#birth",
+    "kwcag": "7.3.2",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "placeholder만 있는 입력칸(axe는 통과)"
+  },
+  {
+    "id": "signup-09",
+    "selector": "#pw",
+    "kwcag": "5.3.3",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "비밀번호 규칙을 위치로만 안내, 입력칸과 연결 안 됨"
+  },
+  {
+    "id": "signup-10",
+    "selector": "#phone",
+    "kwcag": "7.3.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "오류를 빨간 테두리로만 표시, 이유 없음"
+  },
+  {
+    "id": "signup-11",
+    "selector": "#country",
+    "kwcag": "7.2.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "선택만 바꿔도 페이지 이동"
+  },
+  {
+    "id": "signup-12",
+    "selector": "#captcha-img",
+    "kwcag": "7.3.3",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "이미지 보안문자만 제공"
+  },
+  {
+    "id": "signup-13",
+    "selector": "#terms-link",
+    "kwcag": "7.2.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "새 창 안내 없음(사람 확인 대상)"
+  },
+  {
+    "id": "signup-14",
+    "selector": "#signup-steps",
+    "kwcag": "5.4.1",
+    "judgedBy": "ai",
+    "answer": "pass",
+    "note": "현재 단계 표시 정상"
+  }
+]

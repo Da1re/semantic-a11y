@@ -1,0 +1,142 @@
+[
+  {
+    "id": "shop-01",
+    "selector": "#cart-button",
+    "kwcag": "5.1.1",
+    "judgedBy": "rule",
+    "rule": "button-name",
+    "answer": "fail",
+    "note": "아이콘만 있는 장바구니 버튼에 이름이 없다"
+  },
+  {
+    "id": "shop-02",
+    "selector": "#qty-input",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "fail",
+    "note": "수량 입력칸에 레이블이 없다"
+  },
+  {
+    "id": "shop-03",
+    "selector": "#stock-status",
+    "kwcag": "5.4.3",
+    "judgedBy": "rule",
+    "rule": "color-contrast",
+    "answer": "fail",
+    "note": "품절 안내 글자 대비가 부족하다"
+  },
+  {
+    "id": "shop-04",
+    "selector": "#wish-button",
+    "kwcag": "5.1.1",
+    "judgedBy": "rule",
+    "rule": "button-name",
+    "answer": "pass",
+    "note": "찜하기 아이콘 버튼은 aria-label이 있다"
+  },
+  {
+    "id": "shop-05",
+    "selector": "#product-hero-img",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "셔츠 사진에 \"빨간 원피스\" alt"
+  },
+  {
+    "id": "shop-06",
+    "selector": "#thumb-front",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "썸네일 alt가 모두 \"상품 이미지\""
+  },
+  {
+    "id": "shop-07",
+    "selector": "#thumb-back",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "썸네일 alt가 모두 \"상품 이미지\""
+  },
+  {
+    "id": "shop-08",
+    "selector": "#thumb-fabric",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "썸네일 alt가 모두 \"상품 이미지\""
+  },
+  {
+    "id": "shop-09",
+    "selector": "#size-m",
+    "kwcag": "5.4.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "선택한 사이즈를 테두리 색으로만 표시"
+  },
+  {
+    "id": "shop-10",
+    "selector": "#more-material",
+    "kwcag": "6.4.3",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "\"자세히\" 링크 3개가 서로 다른 곳으로 이동"
+  },
+  {
+    "id": "shop-11",
+    "selector": "#more-size",
+    "kwcag": "6.4.3",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "\"자세히\" 링크 3개가 서로 다른 곳으로 이동"
+  },
+  {
+    "id": "shop-12",
+    "selector": "#more-delivery",
+    "kwcag": "6.4.3",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "\"자세히\" 링크 3개가 서로 다른 곳으로 이동"
+  },
+  {
+    "id": "shop-13",
+    "selector": "#more-reviews",
+    "kwcag": "6.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "리뷰 더보기가 div onclick"
+  },
+  {
+    "id": "shop-14",
+    "selector": "#promo-banner",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "배너 alt에 할인 조건이 빠짐(사람 확인 대상)"
+  },
+  {
+    "id": "shop-15",
+    "selector": "#site-logo",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "pass",
+    "note": "로고 alt 정상"
+  },
+  {
+    "id": "shop-16",
+    "selector": "#detail-divider",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "pass",
+    "note": "장식 구분선 alt=\"\" 정상"
+  },
+  {
+    "id": "shop-17",
+    "selector": "#fabric-detail",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "pass",
+    "note": "원단 사진 alt 정상"
+  }
+]

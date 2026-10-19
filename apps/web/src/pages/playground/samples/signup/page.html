@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입 | trip.example</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif; color: rgb(24, 32, 46); background: rgb(244, 247, 251); line-height: 1.5; word-break: keep-all; }
+  a { color: inherit; }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+
+  .site-header { background: rgb(255, 255, 255); border-bottom: 1px solid rgb(226, 232, 240); }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo img { width: 150px; display: block; }
+  .site-header nav ul { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+  .site-header nav a { display: inline-block; padding: 8px 12px; font-size: 14px; font-weight: 600; text-decoration: none; }
+
+  .layout { display: grid; grid-template-columns: 1fr; gap: 24px; padding: 36px 0 56px; }
+  @media (min-width: 820px) { .layout { grid-template-columns: 1.5fr 1fr; align-items: start; } }
+
+  .card { padding: 32px; background: rgb(255, 255, 255); border-radius: 18px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06); }
+  .card h1 { margin: 0 0 18px; font-size: 26px; }
+
+  .steps { display: flex; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; font-size: 13px; }
+  .steps li { flex: 1; padding: 10px 12px; border-radius: 10px; background: rgb(241, 245, 249); color: rgb(71, 85, 105); }
+  .steps li[aria-current="step"] { background: rgb(29, 78, 216); color: rgb(255, 255, 255); font-weight: 700; }
+  .steps .now { margin-left: 4px; padding: 1px 6px; border-radius: 999px; background: rgb(255, 255, 255); color: rgb(29, 78, 216); font-size: 11px; }
+
+  .note { margin: 0 0 20px; font-size: 14px; color: rgb(71, 85, 105); }
+  .field { margin: 0 0 18px; }
+  .field > label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 700; color: rgb(71, 85, 105); }
+  .field > label.req { color: rgb(198, 40, 40); }
+  .input, select { width: 100%; height: 48px; padding: 0 14px; border: 1px solid rgb(203, 213, 225); border-radius: 10px; background: rgb(255, 255, 255); font: inherit; font-size: 15px; color: inherit; }
+  .input::placeholder { color: rgb(100, 116, 139); }
+  .input.is-invalid { border: 2px solid rgb(211, 47, 47); }
+  .hint { margin: 6px 0 0; font-size: 13px; color: rgb(71, 85, 105); }
+  .error-text { margin: 6px 0 0; font-size: 13px; color: rgb(240, 150, 150); }
+  .row { display: flex; gap: 8px; }
+  .row select { width: 120px; flex: none; }
+
+  .captcha { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .captcha img { width: 180px; height: 56px; border-radius: 10px; border: 1px solid rgb(203, 213, 225); display: block; }
+  .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid rgb(203, 213, 225); border-radius: 10px; background: rgb(255, 255, 255); color: inherit; cursor: pointer; }
+
+  .agree { display: flex; align-items: center; gap: 8px; padding: 14px; border-radius: 10px; background: rgb(248, 250, 252); font-size: 14px; }
+  .agree input { width: 20px; height: 20px; }
+  .agree a { margin-left: auto; padding: 4px 0; font-weight: 600; }
+
+  .submit { width: 100%; height: 54px; margin-top: 22px; border: 0; border-radius: 12px; background: rgb(29, 78, 216); color: rgb(255, 255, 255); font-size: 16px; font-weight: 700; cursor: pointer; }
+
+  .side { display: grid; gap: 16px; }
+  .side h2 { margin: 0 0 10px; font-size: 17px; }
+  .side ul { margin: 0; padding-left: 18px; font-size: 14px; color: rgb(51, 65, 85); }
+  .side li + li { margin-top: 4px; }
+  .benefit { background: rgb(30, 41, 59); color: rgb(255, 255, 255); }
+  .benefit p { margin: 0; font-size: 14px; color: rgb(203, 213, 225); }
+  .benefit strong { display: block; margin: 4px 0 8px; font-size: 22px; color: rgb(253, 224, 71); }
+
+  .site-footer { padding: 24px 0 40px; font-size: 13px; color: rgb(71, 85, 105); }
+  .site-footer p { margin: 2px 0; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo"><img id="site-logo" alt="trip.example 홈" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 56' width='300' height='56'><path d='M8 30 L44 12 L34 46 L26 34 Z' fill='rgb(29,78,216)'/><path d='M26 34 L44 12' stroke='white' stroke-width='2'/><text x='56' y='38' font-family='Arial, sans-serif' font-size='28' font-weight='800' fill='rgb(24,32,46)'>trip.example</text></svg>"></a>
+    <nav aria-label="계정 메뉴">
+      <ul>
+        <li><a href="/login">로그인</a></li>
+        <li><a href="/help">고객센터</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap layout">
+  <div class="card">
+    <h1>회원가입</h1>
+    <ol id="signup-steps" class="steps">
+      <li>1. 약관 동의</li>
+      <li aria-current="step">2. 정보 입력 <span class="now">현재</span></li>
+      <li>3. 가입 완료</li>
+    </ol>
+    <p id="required-note" class="note">빨간색 항목은 필수 입력입니다.</p>
+
+    <form action="/signup" method="post">
+      <div class="field">
+        <label for="email" class="req">이메일</label>
+        <input id="email" class="input" type="email" name="email" autocomplete="email" value="traveler@mail.example">
+      </div>
+
+      <div class="field">
+        <input id="name" class="input" type="text" name="name" autocomplete="name" placeholder="이름">
+      </div>
+
+      <div class="field">
+        <label for="pw" class="req">비밀번호</label>
+        <input id="pw" class="input" type="password" name="password" autocomplete="new-password">
+        <p class="hint">오른쪽 안내를 참고해 주세요.</p>
+      </div>
+
+      <div class="field">
+        <label for="pw2" class="req">비밀번호 확인</label>
+        <input id="pw2" class="input" type="password" name="password2" autocomplete="new-password" value="trip1234">
+        <p id="pw-confirm-error" class="error-text">비밀번호가 일치하지 않습니다.</p>
+      </div>
+
+      <div class="field">
+        <input id="birth" class="input" type="text" name="birth" inputmode="numeric" autocomplete="bday" placeholder="생년월일 8자리 (예: 19990101)">
+      </div>
+
+      <div class="field">
+        <label for="phone" class="req">휴대폰 번호</label>
+        <div class="row">
+          <select id="carrier" name="carrier"><option>SKT</option><option>KT</option><option>LG U+</option><option>알뜰폰</option></select>
+          <input id="phone" class="input is-invalid" type="tel" name="phone" autocomplete="tel" value="010-12">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="country">국가/지역</label>
+        <select id="country" name="country" onchange="location.href='/signup?country=' + this.value"><option value="kr">대한민국</option><option value="jp">일본</option><option value="us">미국</option></select>
+      </div>
+
+      <div class="field">
+        <label for="captcha-input" class="req">보안문자 입력</label>
+        <div class="captcha">
+          <img id="captcha-img" alt="보안문자" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 56' width='180' height='56'><rect width='180' height='56' fill='rgb(241,245,249)'/><path d='M0 36 Q30 10 60 30 T120 26 T180 34' stroke='rgb(148,163,184)' stroke-width='2' fill='none'/><path d='M0 20 Q40 44 90 24 T180 22' stroke='rgb(203,213,225)' stroke-width='3' fill='none'/><g font-family='Courier New, monospace' font-size='30' font-weight='700' fill='rgb(51,65,85)'><text x='18' y='40' transform='rotate(-12 28 32)'>7</text><text x='48' y='38' transform='rotate(10 58 30)'>K</text><text x='80' y='42' transform='rotate(-6 90 34)'>2</text><text x='110' y='36' transform='rotate(14 120 28)'>9</text><text x='140' y='41' transform='rotate(-10 150 33)'>P</text></g></svg>">
+          <button type="button" id="captcha-refresh" class="icon-btn"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></button>
+        </div>
+        <input id="captcha-input" class="input" type="text" name="captcha" autocomplete="off">
+      </div>
+
+      <div class="agree">
+        <input id="agree-terms" type="checkbox" name="agree">
+        <label for="agree-terms">[필수] 이용약관에 동의합니다</label>
+        <a id="terms-link" href="/terms" target="_blank">약관 보기</a>
+      </div>
+
+      <button type="submit" class="submit">가입하기</button>
+    </form>
+  </div>
+
+  <aside class="side" aria-label="가입 안내">
+    <section class="card" aria-labelledby="pw-rule-title">
+      <h2 id="pw-rule-title">비밀번호 규칙</h2>
+      <ul>
+        <li>영문, 숫자, 특수문자를 모두 섞어 주세요</li>
+        <li>8자 이상 16자 이하</li>
+        <li>이메일 아이디와 같은 문자열은 쓸 수 없어요</li>
+      </ul>
+    </section>
+    <section class="card benefit" aria-labelledby="benefit-title">
+      <h2 id="benefit-title">가입 혜택</h2>
+      <p>지금 가입하면 첫 예약에</p>
+      <strong>10% 할인 쿠폰</strong>
+      <p>숙소·항공 모두 쓸 수 있어요. 발급일로부터 30일 동안 유효합니다.</p>
+    </section>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>trip.example은 웹 접근성 점검 시연을 위해 만든 가상의 여행 서비스입니다.</p>
+    <p>입력한 정보는 어디에도 전송되지 않습니다.</p>
+  </div>
+</footer>
+</body>
+</html>

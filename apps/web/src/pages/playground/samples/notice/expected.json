@@ -1,0 +1,136 @@
+[
+  {
+    "id": "notice-01",
+    "selector": "#footer-emblem",
+    "kwcag": "5.1.1",
+    "judgedBy": "rule",
+    "rule": "image-alt",
+    "answer": "fail",
+    "note": "푸터 상징 이미지에 alt 속성이 없다"
+  },
+  {
+    "id": "notice-02",
+    "selector": "#survey-good",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "fail",
+    "note": "만족도 라디오 버튼에 레이블이 없다"
+  },
+  {
+    "id": "notice-03",
+    "selector": "#survey-normal",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "fail",
+    "note": "만족도 라디오 버튼에 레이블이 없다"
+  },
+  {
+    "id": "notice-04",
+    "selector": "#survey-bad",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "fail",
+    "note": "만족도 라디오 버튼에 레이블이 없다"
+  },
+  {
+    "id": "notice-05",
+    "selector": "#share-link",
+    "kwcag": "6.4.3",
+    "judgedBy": "rule",
+    "rule": "link-name",
+    "answer": "fail",
+    "note": "공유 아이콘 링크에 이름이 없다"
+  },
+  {
+    "id": "notice-06",
+    "selector": "#site-search",
+    "kwcag": "7.3.2",
+    "judgedBy": "rule",
+    "rule": "label",
+    "answer": "pass",
+    "note": "통합검색 입력칸 레이블 정상(시각적으로 숨김)"
+  },
+  {
+    "id": "notice-07",
+    "selector": "#site-header",
+    "kwcag": "6.4.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "본문 바로가기 없음(axe는 제목만 있으면 통과)"
+  },
+  {
+    "id": "notice-08",
+    "selector": "title",
+    "kwcag": "6.4.2",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "페이지 제목이 \"메인\"으로 내용과 다름"
+  },
+  {
+    "id": "notice-09",
+    "selector": "#briefing-video",
+    "kwcag": "5.4.2",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "영상 자동 재생(axe는 미디어를 못 읽어 판단 못 함)"
+  },
+  {
+    "id": "notice-10",
+    "selector": "#briefing-video",
+    "kwcag": "5.2.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "영상 자막 없음(axe는 \"확인 필요\"로 보류)"
+  },
+  {
+    "id": "notice-11",
+    "selector": "#usage-chart",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "통계 차트 alt가 \"그래프\"뿐"
+  },
+  {
+    "id": "notice-12",
+    "selector": "#stats-table",
+    "kwcag": "5.3.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "표에 제목 셀 없음(axe는 레이아웃 표로 보고 통과)"
+  },
+  {
+    "id": "notice-13",
+    "selector": "#guide-link",
+    "kwcag": "6.4.3",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "\"여기\" 링크, 새 창 안내 없음"
+  },
+  {
+    "id": "notice-14",
+    "selector": "#app-qr",
+    "kwcag": "5.1.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "QR코드 alt가 목적지를 알려 주지 않음(사람 확인 대상)"
+  },
+  {
+    "id": "notice-15",
+    "selector": "#station-table",
+    "kwcag": "5.3.1",
+    "judgedBy": "ai",
+    "answer": "pass",
+    "note": "caption과 제목 셀을 갖춘 표"
+  },
+  {
+    "id": "notice-16",
+    "selector": "#attach-hwp",
+    "kwcag": "6.4.3",
+    "judgedBy": "ai",
+    "answer": "pass",
+    "note": "첨부파일 링크 텍스트 정상"
+  }
+]
