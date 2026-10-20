@@ -1,14 +1,15 @@
 # 다음 세션 인수인계
 
-> 마지막 갱신: 2026-10-19 늦은 밤(VS Code 세션). 세션이 끝날 때마다 이 파일을 최신 상태로 덮어쓴다.
-> 먼저 `CLAUDE.md`(작업·코드 규칙)와 `docs/history/2026-10-19.md`를 읽는다. 설계 문서와 허브는 claude.ai 문서라 VS Code 세션에서 못 열 수 있어서, 필요한 결정은 이 파일에 옮겨 적었다.
+> 마지막 갱신: 2026-10-20(VS Code 세션). 세션이 끝날 때마다 이 파일을 최신 상태로 덮어쓴다.
+> 먼저 `CLAUDE.md`(작업·코드 규칙)와 `docs/history/2026-10-20.md`를 읽는다. 설계 문서와 허브는 claude.ai 문서라 VS Code 세션에서 못 열 수 있어서, 필요한 결정은 이 파일에 옮겨 적었다.
 
 ## 1. 지금 상태
 
 - 중간과제 마감: **2026-10-22(목) 23:59**. 제출물은 PPT + 공개 URL
 - 공개 URL: https://semantic-a11y.vercel.app (main에 푸시하면 Vercel이 자동 배포). 배포별 주소(`...-da1res-projects.vercel.app`)는 Vercel 로그인으로 막혀 있으니 제출·공유에 쓰지 않는다
 - GitHub: https://github.com/Da1re/semantic-a11y (개인 계정, public, MIT)
-- 1단계 기능은 모두 브랜치 **`feat/playground-v1-dalre`**에 커밋했다(아직 main에 안 합쳤고 푸시도 안 했다). 수빈이 확인한 뒤 main에 합치고 푸시하면 배포된다
+- 1단계 기능(할 일 3-1~3-8)은 2026-10-20에 main에 합쳐 푸시했고 배포까지 확인했다(배포 사이트에서 샘플 3종 숫자·수정 적용 0건 확인)
+- 그 뒤 목록 화살표 키 이동과 문서 갱신을 브랜치 **`feat/list-arrow-keys-v1-dalre`**에 커밋했다. main에 합쳐 푸시하면 배포된다
 
 ### 동작하는 것
 
@@ -16,6 +17,7 @@
   - 입력: 샘플 3종 또는 HTML 붙여넣기(정리 후 점검, AI 미연결 표시)
   - 점검: axe-core 실제 실행 + 샘플별 mock AI 판정. 결과 패널(요약, 레이어·집중 모드 토글, 리포트 언어 ko/en, 내보내기 JSON·Markdown·PDF, 위반 목록)
   - 목록 항목을 펼치면 상세(기준·심각도·출처·근거·코드 조각·수정 전/후·복사). hover·focus 강조, 선택하면 미리보기 안만 스크롤
+  - 목록에서 위·아래 화살표·Home·End로 항목 사이 이동(펼친 상세는 건너뜀). 키보드 초점을 따라 미리보기도 스크롤, 마우스 hover는 스크롤하지 않음
   - "수정 코드 모두 적용하고 다시 점검" → 수정 전/후 비교(해결·남음·새로 생김) + 결과·미리보기 전환
 - `/playground/review`: 신뢰도 0.7 미만 판정 3건(shop `#promo-banner`, signup `#terms-link`, notice `#app-qr`) 승인·반려(사유 필수)·되돌리기. localStorage에 저장, 플레이그라운드 목록에 배지, 반려는 내보내기에서 제외
 
@@ -37,7 +39,8 @@ hooks/            use-current-audit(보기에 맞는 결과), use-preview-source
 store/            playground-store(대상·수정 적용·보기·언어·선택·레이어·집중 모드) + review-store(persist)
                   각각 context + provider + use-xxx-store
 models/           audit-form, audit-target, preview-html, preview-source, overlay-box, report-status, compare-reports,
-                  violation-text(언어별 제목·기준·출처), report-document → to-markdown / to-print-html, review-decision
+                  violation-text(언어별 제목·기준·출처), report-document → to-markdown / to-print-html, review-decision,
+                  list-navigation(화살표·Home·End → 다음 위치)
 components/       playground-page, input/(audit-form, source-picker, sample-picker, html-input),
                   preview/(preview-frame, preview-placeholder, overlay-layer, overlay-box, focus-scrim), progress/,
                   report/(report-panel, report-summary, layer-toggles, report-locale-toggle, review-badge, violation-list,
@@ -58,12 +61,13 @@ components/       playground-page, input/(audit-form, source-picker, sample-pick
 - 펼침 상태 = 스토어 `selected`(선택 = 펼침 = 미리보기 스크롤)
 - 붙여 넣은 HTML 정리: DOMParser → `on*` 이름 변경 → style 글자 `<` 뒤 공백 → DOMPurify(`WHOLE_DOCUMENT`, `ADD_TAGS: ['title']`, `SAFE_FOR_XML`은 끄지 않는다) → doctype
 - 검수 결정 저장 키 `semantic-a11y:review`(version 1). 플레이그라운드·검수 페이지가 각자 Provider를 두고 같은 키를 쓴다(라우터는 그대로)
-- 에러 표시는 화면 안 문장(점검 실패, 복사 실패, 팝업 차단). 토스트로 바꾸려면 의존성 추가라 수빈 승인 필요(아직 답 없음)
+- **이 프로젝트는 토스트 대신 화면 안 문장**(2026-10-20 수빈 결정, CLAUDE.md 코드 규칙에도 적음). 점검 실패는 결과 패널, 복사 결과는 버튼 옆, 팝업 차단은 내보내기 영역, 입력 오류는 입력칸 아래
+- 목록 키보드 이동은 W3C APG 아코디언 패턴의 선택 키를 따른다. 끝에서 반대쪽으로 돌아가지 않는다. Tab 순서는 그대로 둔다(roving tabindex 아님)
 
 ## 3. 할 일 (순서대로)
 
 ### 3-1. 배포
-- 브랜치 `feat/playground-v1-dalre` 확인 → main에 합치고 푸시 → https://semantic-a11y.vercel.app 에서 샘플 3종·붙여넣기·검수·내보내기 한 번씩 확인
+- 브랜치 `feat/list-arrow-keys-v1-dalre`를 main에 합치고 푸시 → https://semantic-a11y.vercel.app 에서 목록 화살표 키 이동 확인
 
 ### 3-2. 목요일 제출 준비
 - 지인 1~2명 사용 → 막힌 점 고치고 전후 캡처(수정 적용 비교 화면이 "개선 전후" 핵심 시연)
@@ -72,12 +76,11 @@ components/       playground-page, input/(audit-form, source-picker, sample-pick
 
 ### 3-3. 미정·보류 (수빈 결정 필요)
 - 점검 범위 표시(설계: 점검 영역 테두리, 제외 영역 빗금): 엔진에 "제외 영역" 개념이 없어 보류. 무엇을 제외할지(숨김 요소, iframe, 사용자가 고른 영역 등) 정해야 만들 수 있다
-- 설계 문서의 "목록에서 위·아래 화살표로 이동하면 오버레이도 따라간다"는 아직 없다(지금은 Tab 이동)
-- 메인 JS 청크가 496KB로 Vite 경고 기준(500KB)에 거의 닿았다. 페이지 단위 지연 로드(`React.lazy`)는 라우터 수정이라 승인 필요
-- 토스트 도입 여부(의존성 추가)
+- 메인 JS 청크가 497KB로 Vite 경고 기준(500KB)에 거의 닿았다. 페이지 단위 지연 로드(`React.lazy`)는 라우터 수정이라 승인 필요
 
-### 3-4. 기록
-- claude.ai 허브·설계 문서의 결정 로그·다음 할 일 갱신(Cowork 세션)
+### 3-4. 기록 (코드 작업이 끝난 뒤 Cowork 세션에서 한 번에)
+- 수빈 결정(2026-10-20): 코드 수정과 지인 테스트 수정을 먼저 끝내고, claude.ai 허브·설계 문서는 그 뒤 한 번에 갱신한다
+- 반영할 것: 1단계 구현 완료와 배포, 결정 로그(토스트 대신 화면 안 문장, DOMPurify style 처리, AI 미연결 표시, 화살표 키), 범위 표시 보류, 다음 할 일
 
 ## 4. 함정 메모
 
