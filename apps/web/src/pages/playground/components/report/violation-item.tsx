@@ -1,7 +1,8 @@
-import { useId } from 'react';
+import { useId, type KeyboardEvent } from 'react';
 import { JUDGED_BY_LABEL } from '../../constants/judged-by';
 import { SEVERITY_LABEL, type Severity } from '../../constants/severity';
 import type { Violation } from '../../engine/types';
+import { toNextIndex } from '../../models/list-navigation';
 import { toViolationTitle } from '../../models/violation-text';
 import { usePlaygroundStore } from '../../store/use-playground-store';
 import { ViolationDetail } from './detail/violation-detail';
@@ -22,11 +23,23 @@ export function ViolationItem({ violation, number }: ViolationItemProps) {
   const detailId = useId();
   const isSelected = usePlaygroundStore((state) => state.selected === violation.fingerprint);
   const highlight = usePlaygroundStore((state) => state.highlight);
+  const focusItem = usePlaygroundStore((state) => state.focusItem);
   const toggleSelect = usePlaygroundStore((state) => state.toggleSelect);
   const locale = usePlaygroundStore((state) => state.locale);
   const { fingerprint, severity, judgedBy } = violation;
   const style = SEVERITY_STYLE[severity];
   const pinShape = judgedBy === 'rule' ? 'rounded-full' : 'rounded-md';
+
+  // 펼친 상세 안의 버튼·링크까지 Tab으로 지나지 않고 항목 사이만 오갈 수 있게 위·아래 화살표를 지원한다
+  const moveFocus = (event: KeyboardEvent<HTMLButtonElement>) => {
+    const toggles = Array.from(
+      event.currentTarget.closest('ol')?.querySelectorAll<HTMLButtonElement>(':scope > li > button') ?? [],
+    );
+    const next = toNextIndex(event.key, toggles.indexOf(event.currentTarget), toggles.length);
+    if (next === null) return;
+    event.preventDefault();
+    toggles[next]?.focus();
+  };
 
   return (
     <li className="rounded-lg border border-slate-200 has-aria-expanded:border-blue-700">
@@ -38,8 +51,9 @@ export function ViolationItem({ violation, number }: ViolationItemProps) {
         onClick={() => toggleSelect(fingerprint)}
         onMouseEnter={() => highlight(fingerprint)}
         onMouseLeave={() => highlight(null)}
-        onFocus={() => highlight(fingerprint)}
-        onBlur={() => highlight(null)}
+        onFocus={() => focusItem(fingerprint)}
+        onBlur={() => focusItem(null)}
+        onKeyDown={moveFocus}
         className="w-full rounded-lg p-3 text-left hover:bg-slate-50 aria-expanded:rounded-b-none aria-expanded:bg-blue-50"
       >
         <span className="flex flex-wrap items-center gap-2 text-xs font-semibold">

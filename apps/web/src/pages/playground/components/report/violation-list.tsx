@@ -10,7 +10,10 @@ export function ViolationList() {
       <h3 id="violations-title" className="font-bold">
         위반 {data.violations.length}건
       </h3>
-      <p className="mt-1 text-sm text-slate-600">항목을 누르면 미리보기에서 해당 위치로 이동합니다.</p>
+      <p className="mt-1 text-sm text-slate-600">
+        항목을 누르면 상세가 펼쳐지고 미리보기가 해당 위치로 이동합니다. 위·아래 화살표와 Home·End 키로 항목 사이를
+        옮겨 다닐 수 있습니다.
+      </p>
       <ol className="mt-3 space-y-2">
         {data.violations.map((violation, index) => (
           <ViolationItem key={violation.fingerprint} violation={violation} number={index + 1} />
