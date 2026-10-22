@@ -97,6 +97,8 @@
   .site-footer ul { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 0 0 12px; padding: 0; list-style: none; }
   .site-footer a { display: inline-block; padding: 4px 0; text-decoration: none; font-weight: 600; }
   .site-footer p { margin: 2px 0; }
+  .skip-link { position: absolute; left: 16px; top: -60px; z-index: 10; padding: 10px 16px; border-radius: 8px; background: rgb(250, 204, 21); color: rgb(15, 23, 42); font-weight: 700; }
+  .skip-link:focus { top: 8px; }
 </style>
 </head>
 <body>
@@ -120,7 +122,7 @@
   </div>
 </header>
 
-<main class="wrap">
+<main id="content" class="wrap">
   <div class="promo">
     <img id="promo-banner" alt="가을 세일" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1032 110' width='1032' height='110'><rect width='1032' height='110' rx='12' fill='rgb(31,77,58)'/><circle cx='960' cy='20' r='70' fill='rgb(52,104,80)'/><circle cx='880' cy='110' r='46' fill='rgb(196,120,52)'/><text x='40' y='52' font-family='sans-serif' font-size='30' font-weight='800' fill='white'>가을 시즌 최대 40%25 할인</text><text x='40' y='84' font-family='sans-serif' font-size='18' fill='rgb(222,236,228)'>10월 31일까지 · 전 상품 무료배송 · 앱 첫 구매 5천원 추가 할인</text></svg>">
   </div>

@@ -1,9 +1,13 @@
 import type { SampleId } from '../constants/sample';
 import type { RawJudgementFile } from '../engine/judge/mock-judge';
+import type { ExpectedLabel } from '../models/evaluate-judgements';
+import noticeExpected from './notice/expected.json';
 import noticeJudgements from './notice/judgements.json';
 import noticeHtml from './notice/page.html?raw';
+import shopExpected from './shop/expected.json';
 import shopJudgements from './shop/judgements.json';
 import shopHtml from './shop/page.html?raw';
+import signupExpected from './signup/expected.json';
 import signupJudgements from './signup/judgements.json';
 import signupHtml from './signup/page.html?raw';
 
@@ -12,6 +16,8 @@ export interface SampleEntry {
   summary: string;
   html: string;
   judgements: RawJudgementFile;
+  /** 정답 라벨. 화면에는 맞음·놓침·오탐 건수로만 보여 준다 */
+  expected: ExpectedLabel[];
 }
 
 export const SAMPLE_CATALOG: Record<SampleId, SampleEntry> = {
@@ -20,17 +26,20 @@ export const SAMPLE_CATALOG: Record<SampleId, SampleEntry> = {
     summary: '상품 사진 대체 텍스트, 색으로만 표시한 선택 상태, 목적이 안 보이는 링크',
     html: shopHtml,
     judgements: shopJudgements,
+    expected: shopExpected,
   },
   signup: {
     site: 'trip.example',
     summary: 'placeholder만 있는 입력칸, 색으로만 알리는 필수·오류, 이미지 보안문자',
     html: signupHtml,
     judgements: signupJudgements,
+    expected: signupExpected,
   },
   notice: {
     site: 'city.example',
     summary: '차트 대체 텍스트, 제목 셀 없는 표, 자동 재생 영상, 본문 바로가기',
     html: noticeHtml,
     judgements: noticeJudgements,
+    expected: noticeExpected,
   },
 };

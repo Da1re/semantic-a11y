@@ -6,7 +6,8 @@ import { usePlaygroundStore } from '../../../store/use-playground-store';
 
 export function FixComparison() {
   const auditTarget = usePlaygroundStore((state) => state.auditTarget);
-  const { data: before } = useAuditQuery(auditTarget);
+  // 수정 비교는 mock 판정에서만 열려서(FixComparePanel) AI 연결 정보 없이 캐시된 원본 결과를 읽는다
+  const { data: before } = useAuditQuery(auditTarget, null);
   const { data: after } = useFixedAuditQuery(toSampleId(auditTarget));
   if (!before || !after) return null;
 

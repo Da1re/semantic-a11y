@@ -20,7 +20,7 @@ export function HtmlInput() {
       </label>
       <p id={hintId} className="mt-1 text-sm text-slate-600">
         페이지 소스 전체나 일부를 붙여 넣으세요. 스크립트와 이벤트 처리기는 실행되지 않게 정리한 뒤 점검하고, 50만 자까지
-        받습니다. AI 판정은 연결되지 않아 규칙(axe) 결과만 보여 줍니다.
+        받습니다. AI를 연결하지 않으면 규칙(axe) 결과만 보여 줍니다.
       </p>
       <textarea
         id={inputId}

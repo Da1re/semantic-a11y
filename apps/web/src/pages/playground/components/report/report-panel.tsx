@@ -3,8 +3,10 @@ import { toReportStatus } from '../../models/report-status';
 import { usePlaygroundStore } from '../../store/use-playground-store';
 import { AuditError } from '../progress/audit-error';
 import { AuditProgress } from '../progress/audit-progress';
+import { AccuracyPanel } from './accuracy/accuracy-panel';
 import { ExportActions } from './export/export-actions';
 import { FixComparePanel } from './fix/fix-compare-panel';
+import { ManualJudgePanel } from './manual/manual-judge-panel';
 import { ReportLocaleToggle } from './report-locale-toggle';
 import { ReportSummary } from './report-summary';
 import { ViolationList } from './violation-list';
@@ -21,8 +23,10 @@ export function ReportPanel() {
     error: <AuditError />,
     done: (
       <>
+        <ManualJudgePanel />
         <FixComparePanel />
         <ReportSummary />
+        <AccuracyPanel />
         <ReportLocaleToggle />
         <ExportActions />
         <ViolationList />

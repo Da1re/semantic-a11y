@@ -138,5 +138,13 @@
     "judgedBy": "ai",
     "answer": "pass",
     "note": "원단 사진 alt 정상"
+  },
+  {
+    "id": "shop-18",
+    "selector": "html > body > header",
+    "kwcag": "6.4.1",
+    "judgedBy": "ai",
+    "answer": "fail",
+    "note": "본문 바로가기 없음(axe는 제목만 있으면 통과). 10/22 실제 모델 판정에서 찾아 정답표에 추가"
   }
 ]

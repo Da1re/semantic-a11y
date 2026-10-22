@@ -4,10 +4,19 @@ import { ReportViewToggle } from './report-view-toggle';
 
 export function FixComparePanel() {
   const isSample = usePlaygroundStore((state) => state.auditTarget?.kind === 'sample');
+  const isLlm = usePlaygroundStore((state) => Boolean(state.auditTarget?.llm));
   const fixesApplied = usePlaygroundStore((state) => state.fixesApplied);
   const applyAllFixes = usePlaygroundStore((state) => state.applyAllFixes);
   // 붙여 넣은 HTML은 AI가 연결되지 않아 수정 제안이 없으므로 적용·비교할 것이 없다
   if (!isSample) return null;
+  // 적용할 수정 코드와 재점검 판정이 샘플의 mock 파일에 묶여 있어서, AI 판정 결과에 섞으면 비교가 틀어진다
+  if (isLlm) {
+    return (
+      <p className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+        수정 코드 적용·재점검 비교는 아직 mock 판정에서만 됩니다. AI 연결을 끊고 같은 샘플을 점검하면 볼 수 있습니다.
+      </p>
+    );
+  }
 
   return (
     <section aria-labelledby="fix-compare-title" className="mt-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3">

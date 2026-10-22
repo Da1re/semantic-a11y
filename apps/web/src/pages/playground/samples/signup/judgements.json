@@ -129,6 +129,21 @@
         "ko": "현재 단계를 색뿐 아니라 \"현재\" 글자와 aria-current로도 알려 준다.",
         "en": "The current step is conveyed by the word \"current\" and aria-current, not only by color."
       }
+    },
+    {
+      "selector": "html > body > header",
+      "kwcag": "6.4.1",
+      "verdict": "fail",
+      "confidence": 0.82,
+      "severity": "moderate",
+      "reason": {
+        "ko": "본문 앞 머리글에 로고와 메뉴 등 초점 받는 요소가 3개 있는데 \"본문 바로가기\" 링크가 없다. 키보드 사용자는 매번 이것을 모두 지나야 본문에 닿는다. axe는 제목(h1~h6)만 있으면 통과시킨다.",
+        "en": "The header has 3 focusable items (logo, menus) before the content but no \"skip to content\" link. Keyboard users must tab through all of them on every page. axe passes the page as long as it has headings."
+      },
+      "fix": {
+        "before": "<body>\n<header class=\"site-header\">",
+        "after": "<body>\n<a class=\"skip-link\" href=\"#content\">본문 바로가기</a>\n<header class=\"site-header\">"
+      }
     }
   ],
   "ruleFixes": [

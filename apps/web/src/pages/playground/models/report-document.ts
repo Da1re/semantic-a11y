@@ -1,8 +1,10 @@
+import { LLM_PROVIDER, LLM_PROVIDER_LABEL } from '../constants/llm-provider';
 import type { ReportLocale } from '../constants/report-locale';
 import { REPORT_VIEW_LABEL, type ReportView } from '../constants/report-view';
 import { SAMPLE_ID, SAMPLE_LABEL, type SampleId } from '../constants/sample';
 import { SEVERITY_LABEL } from '../constants/severity';
 import type { AuditReport, AuditSource, Fix, JudgeMode, Violation } from '../engine/types';
+import { hasAiResult } from './judge-mode';
 import { toSourceText, toStandardText, toViolationTitle } from './violation-text';
 
 export interface ReportContext {
@@ -64,7 +66,20 @@ const JUDGE_NOTE: Record<JudgeMode, Record<ReportLocale, string>> = {
     en: 'axe-core rules only (AI not connected)',
   },
   llm: { ko: 'axe-core 규칙 점검 + AI 판정(LLM)', en: 'axe-core rules + AI judgement (LLM)' },
+  awaiting: {
+    ko: 'axe-core 규칙 점검만(내 AI의 답을 아직 붙여 넣지 않음)',
+    en: 'axe-core rules only (answer from my AI not pasted yet)',
+  },
 };
+
+// 어떤 모델이 판정했는지 남겨야 리포트를 다시 읽을 때 결과를 믿을 만한지 판단할 수 있다(키는 meta에 없다)
+function toJudgeText(report: AuditReport, locale: ReportLocale): string {
+  const note = JUDGE_NOTE[report.judgeMode][locale];
+  const meta = report.judgeMeta;
+  if (!meta) return note;
+  if (meta.provider === LLM_PROVIDER.MANUAL) return `${note} · ${LLM_PROVIDER_LABEL.manual[locale]}`;
+  return `${note} · ${meta.provider} ${meta.model}`;
+}
 
 function isSampleId(id: string): id is SampleId {
   return Object.values(SAMPLE_ID).some((sampleId) => sampleId === id);
@@ -103,15 +118,14 @@ export function toReportDocument(report: AuditReport, context: ReportContext): R
   const text = TEXT[locale];
   const violations = toExportedViolations(report, rejected);
   const countBy = (judgedBy: Violation['judgedBy']) => violations.filter((v) => v.judgedBy === judgedBy).length;
-  // AI가 연결되지 않은 점검에서 "AI 위반 0"을 실으면 문제가 없다는 뜻으로 읽히므로 AI 줄을 아예 뺀다
-  const aiSummary =
-    report.judgeMode === 'disconnected'
-      ? []
-      : [
-          { label: text.candidates, value: report.stats.candidates },
-          { label: text.ai, value: countBy('ai') },
-          { label: text.review, value: violations.filter((v) => v.needsReview).length },
-        ];
+  // AI 판정이 없는 점검에서 "AI 위반 0"을 실으면 문제가 없다는 뜻으로 읽히므로 AI 줄을 아예 뺀다
+  const aiSummary = hasAiResult(report.judgeMode)
+    ? [
+        { label: text.candidates, value: report.stats.candidates },
+        { label: text.ai, value: countBy('ai') },
+        { label: text.review, value: violations.filter((v) => v.needsReview).length },
+      ]
+    : [];
   return {
     locale,
     title: text.title,
@@ -119,7 +133,7 @@ export function toReportDocument(report: AuditReport, context: ReportContext): R
       { label: text.target, value: toTargetLabel(report.source, locale) },
       { label: text.view, value: REPORT_VIEW_LABEL[view][locale] },
       { label: text.generatedAt, value: generatedAt.toLocaleString(locale === 'ko' ? 'ko-KR' : 'en-US') },
-      { label: text.judge, value: JUDGE_NOTE[report.judgeMode][locale] },
+      { label: text.judge, value: toJudgeText(report, locale) },
     ],
     summary: [
       { label: text.checked, value: report.stats.checkedElements },
@@ -148,6 +162,7 @@ export function toReportJson(report: AuditReport, context: ReportContext): strin
     source: report.source,
     view: context.view,
     judgeMode: report.judgeMode,
+    judgeMeta: report.judgeMeta ?? null,
     stats: report.stats,
     excludedByReview: report.violations.length - violations.length,
     violations,

@@ -59,6 +59,8 @@
 
   .site-footer { padding: 24px 0 40px; font-size: 13px; color: rgb(71, 85, 105); }
   .site-footer p { margin: 2px 0; }
+  .skip-link { position: absolute; left: 16px; top: -60px; z-index: 10; padding: 10px 16px; border-radius: 8px; background: rgb(250, 204, 21); color: rgb(15, 23, 42); font-weight: 700; }
+  .skip-link:focus { top: 8px; }
 </style>
 </head>
 <body>
@@ -74,7 +76,7 @@
   </div>
 </header>
 
-<main class="wrap layout">
+<main id="content" class="wrap layout">
   <div class="card">
     <h1>회원가입</h1>
     <ol id="signup-steps" class="steps">

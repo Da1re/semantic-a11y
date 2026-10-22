@@ -4,8 +4,8 @@
 
 | id | 페이지 | 규칙(axe) 위반 | AI 판정 | 사람 확인 대상 |
 | --- | --- | --- | --- | --- |
-| `shop` | shop.example 상품 상세 | 3 | 실패 10 · 정상 3 | `#promo-banner` |
-| `signup` | trip.example 회원가입 | 3 | 실패 8 · 정상 1 | `#terms-link` |
+| `shop` | shop.example 상품 상세 | 3 | 실패 11 · 정상 3 | `#promo-banner` |
+| `signup` | trip.example 회원가입 | 3 | 실패 9 · 정상 1 | `#terms-link` |
 | `notice` | city.example 공지·통계 | 5 | 실패 8 · 정상 2 | `#app-qr` |
 
 ## 파일
@@ -13,7 +13,7 @@
 ```
 <id>/
   page.html         점검 대상. 스타일 포함, 이미지는 SVG data URI
-  expected.json     정답 라벨. 성능 측정용이라 화면에 그대로 보여 주지 않는다
+  expected.json     정답 라벨. 성능 측정용이라 화면에는 "정답 대비"(맞음·놓침·오탐) 건수로만 보여 준다
   judgements.json   mock AI 출력. judgements(의미 판정) + ruleFixes(규칙 위반 수정 제안)
 ```
 
@@ -26,6 +26,7 @@
 
 - `judgedBy`: 이 항목을 잡아야 하는 쪽. `rule`이면 `rule`에 axe 규칙 id가 있다.
 - `answer`: `fail`(위반) 또는 `pass`(정상 요소. 오탐 확인용).
+- 결과 패널의 "정답 대비"는 `selector + kwcag`가 같은 판정을 맞힌 것으로 센다(`models/evaluate-judgements.ts`). mock은 모두 맞음이어야 정상이고, AI를 연결하면 실제 모델의 성능이 나온다.
 
 ### judgements.json
 
